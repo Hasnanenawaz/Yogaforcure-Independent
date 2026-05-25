@@ -25,6 +25,7 @@ const navLinks = [
   { href: "#schedule", label: "Schedule" },
   { href: "#pricing", label: "Pricing" },
   { href: "#gallery", label: "Gallery" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function FloatingNavbar() {

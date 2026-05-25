@@ -26,6 +26,9 @@ export default function Footer() {
           <Link href="/gallery" className="text-[#faf8f5] hover:text-[#9caf88] transition-colors">
             Gallery
           </Link>
+          <Link href="/blog" className="text-[#faf8f5] hover:text-[#9caf88] transition-colors">
+            Blog
+          </Link>
         </nav>
         <p className="text-sm sm:text-base">
           © {currentYear} Yoga for Cure

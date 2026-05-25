@@ -156,3 +156,39 @@ body {
     animation: none;
   }
 }
+
+.prose-blog h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a3a1a;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-blog h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a3a1a;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-blog ul,
+.prose-blog ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose-blog li {
+  margin-bottom: 0.35rem;
+}
+
+.prose-blog a {
+  color: #2d5a2d;
+  text-decoration: underline;
+}
+
+.prose-blog strong {
+  font-weight: 600;
+  color: #1a3a1a;
+}

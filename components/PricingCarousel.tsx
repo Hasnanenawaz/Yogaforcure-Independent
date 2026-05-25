@@ -24,7 +24,7 @@ const plans: PricingPlan[] = [
   {
     id: "6months",
     title: "6 Months",
-    price: "₹5400",
+    price: "₹5500",
     duration: "per 6 months",
     badge: "Best Value",
   },

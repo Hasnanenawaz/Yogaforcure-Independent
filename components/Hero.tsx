@@ -103,7 +103,7 @@ export default function Hero({ onHeroReady }: HeroProps) {
               {/* Main Image */}
               <img
                 src="/hero-section.webp"
-                alt="Woman doing yoga"
+                alt="Yoga instructor in practice — Yoga by Neha online classes"
                 className="relative z-10 w-full h-full object-contain object-center rounded-3xl lg:rounded-none lg:bg-transparent"
                 style={{
                   maskImage:

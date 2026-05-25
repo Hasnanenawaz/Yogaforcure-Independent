@@ -15,8 +15,19 @@ type PricingPlan = {
 
 const plans: PricingPlan[] = [
   { id: "monthly", title: "Monthly", price: "₹1500", duration: "per month" },
-  { id: "3months", title: "3 Months", price: "₹3000", duration: "per 3 months" },
-  { id: "6months", title: "6 Months", price: "₹5500", duration: "per 6 months", badge: "Best Value" },
+  {
+    id: "3months",
+    title: "3 Months",
+    price: "₹3000",
+    duration: "per 3 months",
+  },
+  {
+    id: "6months",
+    title: "6 Months",
+    price: "₹5400",
+    duration: "per 6 months",
+    badge: "Best Value",
+  },
   { id: "1year", title: "1 Year", price: "₹10000", duration: "per year" },
 ];
 
@@ -30,7 +41,10 @@ export default function PricingCarousel() {
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const rafRef = useRef<number | null>(null);
 
-  const defaultPlanIndex = Math.max(0, plans.findIndex((p) => p.badge));
+  const defaultPlanIndex = Math.max(
+    0,
+    plans.findIndex((p) => p.badge),
+  );
   const [activeIndex, setActiveIndex] = useState(defaultPlanIndex);
 
   const dotCount = plans.length;
@@ -40,7 +54,7 @@ export default function PricingCarousel() {
       prefersReducedMotion
         ? { duration: 0 }
         : { duration: 0.55, ease: [0.4, 0, 0.2, 1] as const },
-    [prefersReducedMotion]
+    [prefersReducedMotion],
   );
 
   const measureActive = () => {
@@ -82,7 +96,8 @@ export default function PricingCarousel() {
     const initScroll = () => {
       const el = cardRefs.current[defaultPlanIndex];
       if (el) {
-        scroller.scrollLeft = el.offsetLeft + el.clientWidth / 2 - scroller.clientWidth / 2;
+        scroller.scrollLeft =
+          el.offsetLeft + el.clientWidth / 2 - scroller.clientWidth / 2;
       }
     };
 
@@ -110,7 +125,8 @@ export default function PricingCarousel() {
     const el = cardRefs.current[idx];
     if (!scroller || !el) return;
 
-    const targetLeft = el.offsetLeft + el.clientWidth / 2 - scroller.clientWidth / 2;
+    const targetLeft =
+      el.offsetLeft + el.clientWidth / 2 - scroller.clientWidth / 2;
     scroller.scrollTo({
       left: targetLeft,
       behavior: prefersReducedMotion ? "auto" : "smooth",
@@ -225,7 +241,9 @@ export default function PricingCarousel() {
                         boxShadow: isActive
                           ? "0 22px 70px rgba(0,0,0,0.12)"
                           : "0 10px 30px rgba(0,0,0,0.06)",
-                        borderColor: isActive ? "rgba(45,90,45,0.35)" : "rgba(237,232,224,0.7)",
+                        borderColor: isActive
+                          ? "rgba(45,90,45,0.35)"
+                          : "rgba(237,232,224,0.7)",
                       }}
                       transition={transition}
                       className="
@@ -305,7 +323,9 @@ export default function PricingCarousel() {
                 <span
                   className={[
                     "block rounded-full transition-all duration-300",
-                    isActive ? "w-6 h-2 bg-[#2d5a2d]" : "w-2 h-2 bg-[#9caf88]/50",
+                    isActive
+                      ? "w-6 h-2 bg-[#2d5a2d]"
+                      : "w-2 h-2 bg-[#9caf88]/50",
                   ].join(" ")}
                 />
               </button>

@@ -56,6 +56,21 @@ const organizationSchema = {
   },
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Yoga by Neha",
+  alternateName: "Yoga for Cure",
+  url: baseUrl + "/",
+  description:
+    "Online yoga classes with an experienced Indian yoga teacher. Live group sessions, 1-on-1, and corporate wellness in English.",
+  publisher: {
+    "@type": "Organization",
+    name: "Yoga by Neha",
+    url: baseUrl + "/",
+  },
+};
+
 export default function Home() {
   return (
     <>
@@ -66,6 +81,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
       <HomeClient />
     </>

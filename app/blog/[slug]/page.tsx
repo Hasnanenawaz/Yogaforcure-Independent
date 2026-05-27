@@ -88,7 +88,7 @@ export default async function BlogPostPage({ params }: Props) {
       <FloatingNavbar />
       <main className="min-h-screen bg-[#faf8f5] pt-20 sm:pt-24 pb-16 sm:pb-20 overflow-x-hidden">
         <article className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
-          <nav className="text-xs sm:text-sm text-[#2d2d2d] mb-6 sm:mb-8">
+          <nav className="text-xs sm:text-sm text-[#2d2d2d] mt-4 mb-6 sm:mb-8">
             <Link href="/" className="hover:text-[#2d5a2d]">
               Home
             </Link>

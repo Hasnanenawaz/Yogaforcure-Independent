@@ -1,0 +1,39 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        DATABASE_URL: postgresql://postgres:postgres@postgres:5432/yogabyneha
+
+    container_name: yogabyneha_app
+    restart: unless-stopped
+
+    ports:
+      - "3000:3000"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - postgres
+
+    command: sh -c "npx prisma migrate deploy && node server.js"
+
+  postgres:
+    image: postgres:16
+    container_name: yogabyneha_postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: yogabyneha
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

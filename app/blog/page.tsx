@@ -7,6 +7,8 @@ import { prisma } from "@/lib/prisma";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yogaforcure.in";
 
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: "Blog — Yoga by Neha | Yoga for Cure",
   description:
@@ -37,8 +39,10 @@ export default async function BlogPage() {
       include: { images: { orderBy: { order: "asc" }, take: 1 } },
       orderBy: { updatedAt: "desc" },
     });
-  } catch {
-    /* DB unavailable during build or dev without setup */
+  } catch (error) {
+    // Build-time rendering inside Docker may not have DB connectivity.
+    // We still want the build to succeed, but we should never swallow this silently.
+    console.error("BlogPage: failed to load published blogs:", error);
   }
 
   return (

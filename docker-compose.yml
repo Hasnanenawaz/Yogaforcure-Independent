@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
 
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
 
     env_file:
       - .env
@@ -17,7 +17,7 @@ services:
     depends_on:
       - postgres
 
-    command: sh -c "npx prisma migrate deploy && node server.js"
+    command: sh -c "node server.js"
 
   postgres:
     image: postgres:16
@@ -28,9 +28,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: yogabyneha
-
-    ports:
-      - "5432:5432"
 
     volumes:
       - postgres_data:/var/lib/postgresql/data

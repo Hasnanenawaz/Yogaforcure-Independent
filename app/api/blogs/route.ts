@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdmin, slugify, contentToHtml } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { revalidateBlogPaths } from "@/lib/blogRevalidation";
 
 export async function GET() {
   const session = await requireAdmin();
@@ -76,6 +77,7 @@ export async function POST(request: Request) {
       include: { images: true },
     });
 
+    revalidateBlogPaths(blog.slug);
     return NextResponse.json(blog, { status: 201 });
   } catch (error) {
     console.error("Create blog error:", error);

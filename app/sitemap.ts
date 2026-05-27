@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yogaforcure.in";
 
+export const revalidate = 300;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     {
@@ -39,7 +41,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     return [...staticPages, ...blogPages];
-  } catch {
+  } catch (error) {
+    // Same as blog pages: builds may run without a live DB.
+    console.error("sitemap: failed to load published blogs:", error);
     return staticPages;
   }
 }

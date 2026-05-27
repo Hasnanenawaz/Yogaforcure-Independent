@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { requireAdmin, slugify, contentToHtml } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { deleteFromCloudinary } from "@/lib/cloudinary";
+import { revalidateBlogPaths } from "@/lib/blogRevalidation";
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -52,6 +53,7 @@ export async function PUT(request: Request, context: RouteContext) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
+    const previousSlug = existing.slug;
     let slug = existing.slug;
     if (title && slugify(title) !== slugify(existing.title)) {
       slug = slugify(title);
@@ -113,6 +115,9 @@ export async function PUT(request: Request, context: RouteContext) {
       include: { images: { orderBy: { order: "asc" } } },
     });
 
+    // If slug changed, invalidate both old and new URLs.
+    revalidateBlogPaths(previousSlug);
+    revalidateBlogPaths(blog.slug);
     return NextResponse.json(blog);
   } catch (error) {
     console.error("Update blog error:", error);
@@ -144,6 +149,7 @@ export async function PATCH(request: Request, context: RouteContext) {
       data: { published: Boolean(published) },
     });
 
+    revalidateBlogPaths(blog.slug);
     return NextResponse.json(blog);
   } catch (error) {
     console.error("Toggle publish error:", error);
@@ -176,5 +182,6 @@ export async function DELETE(_request: Request, context: RouteContext) {
   }
 
   await prisma.blog.delete({ where: { id } });
+  revalidateBlogPaths(blog.slug);
   return NextResponse.json({ success: true });
 }

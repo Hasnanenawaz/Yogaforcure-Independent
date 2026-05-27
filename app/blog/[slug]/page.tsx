@@ -10,17 +10,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yogaforcure.in";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  try {
-    const blogs = await prisma.blog.findMany({
-      where: { published: true },
-      select: { slug: true },
-    });
-    return blogs.map((b) => ({ slug: b.slug }));
-  } catch {
-    return [];
-  }
-}
+export const revalidate = 300;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

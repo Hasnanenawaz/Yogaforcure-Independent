@@ -2,8 +2,6 @@ services:
   app:
     build:
       context: .
-      args:
-        DATABASE_URL: postgresql://postgres:postgres@postgres:5432/yogabyneha
 
     container_name: yogabyneha_app
     restart: unless-stopped

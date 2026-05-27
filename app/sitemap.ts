@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yogaforcure.in";
 
 export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
@@ -27,23 +28,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  try {
-    const blogs = await prisma.blog.findMany({
-      where: { published: true },
-      select: { slug: true, updatedAt: true },
-    });
+  const blogs = await prisma.blog.findMany({
+    where: { published: true },
+    select: { slug: true, updatedAt: true },
+  });
 
-    const blogPages: MetadataRoute.Sitemap = blogs.map((blog) => ({
-      url: `${baseUrl}/blog/${blog.slug}`,
-      lastModified: blog.updatedAt,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    }));
+  const blogPages: MetadataRoute.Sitemap = blogs.map((blog) => ({
+    url: `${baseUrl}/blog/${blog.slug}`,
+    lastModified: blog.updatedAt,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
 
-    return [...staticPages, ...blogPages];
-  } catch (error) {
-    // Same as blog pages: builds may run without a live DB.
-    console.error("sitemap: failed to load published blogs:", error);
-    return staticPages;
-  }
+  return [...staticPages, ...blogPages];
 }

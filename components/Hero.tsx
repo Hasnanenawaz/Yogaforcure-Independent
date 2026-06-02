@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Leaf } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -9,55 +10,58 @@ interface HeroProps {
 
 export default function Hero({ onHeroReady }: HeroProps) {
   useEffect(() => {
-    // Call onHeroReady when component mounts
     onHeroReady?.();
   }, [onHeroReady]);
+
   return (
-    <div className="relative min-h-screen font-sans text-gray-800 overflow-x-hidden bg-white">
-      {/* Mobile-only background image layer: public/photos/yoga-hero-mobile.webp (small screens only) */}
+    <div className="relative overflow-x-hidden lg:overflow-hidden bg-gradient-to-b from-[#faf8f5] via-white to-white lg:h-dvh lg:max-h-dvh">
+      {/* Mobile background hero */}
       <div
-        className="absolute inset-0 z-0 lg:hidden"
+        className="absolute inset-0 z-0 lg:hidden overflow-hidden"
         aria-hidden
-        style={{
-          backgroundImage: "url('/photos/yoga-hero-mobile.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "35% center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
-      {/* Overlay on mobile: darkens background image slightly so it's less bright and text stays readable */}
-      <div
-        className="absolute inset-0 z-0 bg-black/35 pointer-events-none lg:hidden"
-        aria-hidden
-      />
-      {/* WhatsApp button: mobile only, bottom-right of hero with bounce animation */}
-      <div className="absolute bottom-6 right-4 z-20 lg:hidden">
+      >
+        <Image
+          src="/newPics/mobilehero.webp"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/35" />
+      </div>
+
+      {/* WhatsApp — mobile & tablet */}
+      <div className="absolute bottom-5 right-4 sm:bottom-6 sm:right-6 z-20 lg:hidden">
         <Link
           href={getWhatsAppUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white shadow-xl shadow-green-100/50 animate-bounce"
+          className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white shadow-lg shadow-green-100/60 ring-1 ring-black/5"
           aria-label="Chat on WhatsApp"
         >
           <img
             src="/whatsappicon.webp"
             alt="WhatsApp"
-            className="w-8 h-8 object-contain"
+            className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
           />
         </Link>
       </div>
-      {/* Hero Section: on mobile, only heading/text/buttons overlaid on background; on desktop, two-column layout with hero-section.webp */}
-      <section aria-label="Hero" className="relative z-10 container mx-auto px-4 sm:px-6 pt-12 sm:pt-16 lg:pt-0 xl:pt-0 2xl:pt-0 pb-16 sm:pb-24 lg:-mt-20 xl:-mt-24 2xl:-mt-28 min-h-screen flex flex-col justify-center lg:block">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-          {/* Left Content - on mobile: overlaid on yoga-hero-mobile.jpeg background; on desktop: left column */}
-          <div className="relative z-10 max-w-xl mx-auto lg:mx-0 lg:ml-10 lg:pt-24 xl:pt-28 2xl:pt-32 text-center lg:text-left">
-            <div className="mb-4 sm:mb-6 flex justify-center lg:justify-start">
-              <span className="inline-flex items-center justify-center w-8 h-8 bg-green-100 rounded-full mb-2">
+
+      <section
+        aria-label="Hero"
+        className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-10 pt-[5.25rem] sm:pt-[5.5rem] lg:pt-20 pb-10 sm:pb-90 lg:pb-0 min-h-[100dvh] lg:min-h-0 lg:h-full flex items-center"
+      >
+        <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-9 lg:gap-10 xl:gap-12 lg:h-[calc(100dvh-5rem)] lg:max-h-[calc(100dvh-5rem)] lg:min-h-0 lg:items-center ">
+          {/* Copy */}
+          <div className="flex flex-col justify-center text-center lg:text-left lg:max-w-xl lg:mx-0 order-1 lg:h-full lg:py-4">
+            <div className="mb-2 sm:mb-3 flex justify-center lg:justify-start">
+              <span className="inline-flex items-center justify-center w-9 h-9 bg-green-100/90 lg:bg-green-100/90 rounded-full">
                 <Leaf className="w-5 h-5 text-green-600" />
               </span>
             </div>
 
-            <h2 className="text-5xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.15] text-white lg:text-gray-900 mb-4 sm:mb-6">
+            <h2 className="text-[2rem] leading-[1.12] sm:text-4xl md:text-[2.65rem] lg:text-[2.5rem] xl:text-[2.85rem] 2xl:text-5xl font-bold text-white lg:text-gray-900 mb-3 sm:mb-4">
               Build{" "}
               <span className="text-[#51e17a] lg:text-[#2d5a2d]">strength</span>
               . Improve{" "}
@@ -67,68 +71,61 @@ export default function Hero({ onHeroReady }: HeroProps) {
               .
             </h2>
 
-            <p className="text-white lg:text-gray-500 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed max-w-md mx-auto lg:mx-0">
+            <p className="text-white/95 lg:text-gray-600 text-base sm:text-lg lg:text-base xl:text-lg mb-5 sm:mb-6 lg:mb-7 leading-relaxed max-w-md mx-auto lg:mx-0">
               Feel better in your body. Yoga that fits your life, wherever you
               are.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 justify-center lg:justify-start">
               <Link
                 href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#2d5a2d] hover:bg-[#1a3a1a] text-white px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-md font-medium text-sm sm:text-base transition-all shadow-lg shadow-green-200"
+                className="inline-flex items-center justify-center bg-[#2d5a2d] hover:bg-[#1a3a1a] text-white px-6 py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base transition-colors shadow-md shadow-green-900/10"
               >
                 Join Class
               </Link>
-
               <Link
                 href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#2d5a2d] hover:bg-[#1a3a1a] text-white px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-md font-medium text-sm sm:text-base transition-all shadow-lg shadow-green-200"
+                className="inline-flex items-center justify-center bg-white/95 hover:bg-white text-[#2d5a2d] lg:bg-white lg:hover:bg-[#faf8f5] border border-white/30 lg:border-[#2d5a2d]/25 px-6 py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base transition-colors"
               >
                 Book a Consultation
               </Link>
             </div>
           </div>
 
-          {/* Right Content - hero-section.webp + WhatsApp; hidden on mobile (replaced by yoga-hero-mobile.jpeg background) */}
-          <div className="hidden lg:flex relative h-[700px] xl:h-[800px] 2xl:h-[900px] items-center justify-center pt-24 xl:pt-28 2xl:pt-32">
-            {/* Main Image Container */}
-            <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl aspect-[3/4] lg:aspect-auto lg:h-full">
-              {/* Background decorative blob */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-green-50 to-transparent rounded-full blur-3xl opacity-60 transform translate-y-10"></div>
+          {/* Desktop hero — centered beside text, zoomed in */}
+          <div className="hidden lg:flex order-2 items-center justify-center w-full h-full min-h-0 overflow-hidden">
+            <div className="relative h-[min(82dvh,820px)] w-full max-w-[640px] xl:max-w-[720px] 2xl:max-w-[800px] mx-auto">
+              <div className="absolute inset-0 bg-gradient-to-tr from-green-50/80 via-transparent to-transparent rounded-full blur-3xl opacity-75 pointer-events-none scale-90" />
 
-              {/* Main Image */}
-              <img
-                src="/hero-section.webp"
-                alt="Yoga instructor in practice — Yoga by Neha online classes"
-                className="relative z-10 w-full h-full object-contain object-center rounded-3xl lg:rounded-none lg:bg-transparent"
-                style={{
-                  maskImage:
-                    "linear-gradient(to bottom, black 80%, transparent 100%)",
-                }}
-              />
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  src="/newPics/nobgheroimage.webp"
+                  alt="Yoga instructor in practice — Yoga by Neha online classes"
+                  fill
+                  priority
+                  className="object-contain object-center scale-[1.10] xl:scale-[1.12]  origin-center drop-shadow-[0_16px_48px_rgba(0,0,0,0)]"
+                  sizes="(min-width: 1536px) 800px, (min-width: 1280px) 720px, 640px"
+                />
+              </div>
 
-              {/* Floating Elements */}
-
-              {/* WhatsApp Icon - Top Right */}
-              <div className="absolute top-12 sm:top-20 right-0 lg:-right-4 z-20 bg-white p-3 sm:p-4 lg:p-5 rounded-2xl shadow-xl shadow-green-100/50 animate-bounce duration-3000">
-                <div className="bg-green-50 p-2 sm:p-3 rounded-xl">
-                  <Link
-                    href={getWhatsAppUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <img
-                      src="/whatsappicon.webp"
-                      alt="WhatsApp"
-                      className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 object-contain"
-                    />
-                  </Link>
-                </div>
+              <div className="absolute top-[10%] right-0 xl:right-2 z-20 bg-white p-3 xl:p-4 rounded-2xl shadow-xl shadow-green-100/50 ring-1 ring-black/5 animate-bounce">
+                <Link
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                  aria-label="Chat on WhatsApp"
+                >
+                  <img
+                    src="/whatsappicon.webp"
+                    alt="WhatsApp"
+                    className="w-10 h-10 xl:w-12 xl:h-12 object-contain"
+                  />
+                </Link>
               </div>
             </div>
           </div>

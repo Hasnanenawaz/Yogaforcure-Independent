@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 const MIN_DISPLAY_MS = 600;   // Brief brand exposure
@@ -15,6 +15,7 @@ export default function SplashScreen({
   heroReady?: boolean;
   onReveal?: () => void;
 }) {
+  const prefersReducedMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(true);
   const [isMounted, setIsMounted] = useState(true);
   const startTimeRef = useRef<number>(Date.now());
@@ -70,14 +71,13 @@ export default function SplashScreen({
           style={{ left: 0, right: 0, top: 0, bottom: 0 }}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={prefersReducedMotion ? false : { scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }}
-            transition={{ 
-              duration: 0.8, 
-              ease: [0.4, 0, 0.2, 1],
-              opacity: { duration: 0.6 }
-            }}
+            exit={prefersReducedMotion ? { opacity: 0 } : { scale: 0.95, opacity: 0 }}
+            transition={prefersReducedMotion
+              ? { duration: 0.15 }
+              : { duration: 0.8, ease: [0.4, 0, 0.2, 1], opacity: { duration: 0.6 } }
+            }
             className="relative w-[200px] sm:w-[250px] md:w-[280px] lg:w-[300px] mx-auto"
           >
             <div className="relative w-full aspect-[3/4] sm:aspect-[2/3] md:aspect-[3/4]">

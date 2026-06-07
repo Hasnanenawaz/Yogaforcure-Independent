@@ -380,7 +380,7 @@ export default function GalleryPage() {
                                     loop
                                     playsInline
                                     autoPlay
-                                    preload="auto"
+                                    preload="metadata"
                                   />
                                   {/* Play button overlay for videos */}
                                   <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors duration-300 pointer-events-none">

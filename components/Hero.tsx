@@ -40,9 +40,11 @@ export default function Hero({ onHeroReady }: HeroProps) {
           className="flex items-center justify-center w-14 h-14 rounded-2xl bg-white shadow-lg shadow-green-100/60 ring-1 ring-black/5"
           aria-label="Chat on WhatsApp"
         >
-          <img
+          <Image
             src="/whatsappicon.webp"
             alt="WhatsApp"
+            width={32}
+            height={32}
             className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
           />
         </Link>
@@ -112,7 +114,7 @@ export default function Hero({ onHeroReady }: HeroProps) {
                 />
               </div>
 
-              <div className="absolute top-[10%] right-0 xl:right-2 z-20 bg-white p-3 xl:p-4 rounded-2xl shadow-xl shadow-green-100/50 ring-1 ring-black/5 animate-bounce">
+              <div className="absolute top-[10%] right-0 xl:right-2 z-20 bg-white p-3 xl:p-4 rounded-2xl shadow-xl shadow-green-100/50 ring-1 ring-black/5 animate-bounce motion-reduce:animate-none">
                 <Link
                   href={getWhatsAppUrl()}
                   target="_blank"
@@ -120,9 +122,11 @@ export default function Hero({ onHeroReady }: HeroProps) {
                   className="block"
                   aria-label="Chat on WhatsApp"
                 >
-                  <img
+                  <Image
                     src="/whatsappicon.webp"
                     alt="WhatsApp"
+                    width={48}
+                    height={48}
                     className="w-10 h-10 xl:w-12 xl:h-12 object-contain"
                   />
                 </Link>

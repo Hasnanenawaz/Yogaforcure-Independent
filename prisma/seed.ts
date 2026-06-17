@@ -4,8 +4,8 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  const email = "tanishk.khare40@gmail.com";
-  const password = "tanu0000";
+  const email = "yogaforcuremarketing@gmail.com";
+  const password = "Neha@2025";
   const hashed = await bcrypt.hash(password, 12);
 
   await prisma.admin.upsert({

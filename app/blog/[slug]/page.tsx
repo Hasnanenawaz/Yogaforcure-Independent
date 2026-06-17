@@ -74,10 +74,14 @@ export default async function BlogPostPage({ params }: Props) {
       url: baseUrl,
     },
     mainEntityOfPage: `${baseUrl}/blog/${slug}`,
-    ...(blog.images[0] && {
-      image: blog.images.map((img) => img.url),
-    }),
+    ...(blog.images[0] && { image: blog.images.map((img) => img.url) }),
   };
+
+  const formattedDate = blog.updatedAt.toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <>
@@ -86,60 +90,87 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       <FloatingNavbar />
-      <main className="min-h-screen bg-[#faf8f5] pt-20 sm:pt-24 pb-16 sm:pb-20 overflow-x-hidden">
-        <article className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
-          <nav className="text-xs sm:text-sm text-[#2d2d2d] mt-4 mb-6 sm:mb-8">
-            <Link href="/" className="hover:text-[#2d5a2d]">
-              Home
-            </Link>
-            {" · "}
-            <Link href="/blog" className="hover:text-[#2d5a2d]">
-              Blog
-            </Link>
-          </nav>
 
-          <header className="mb-8 sm:mb-10">
-            <time
-              dateTime={blog.updatedAt.toISOString()}
-              className="text-xs sm:text-sm text-[#9caf88] font-medium uppercase tracking-wider"
-            >
-              {blog.updatedAt.toLocaleDateString("en-IN", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1a3a1a] mt-2 sm:mt-3 leading-tight break-words">
-              {blog.title}
-            </h1>
-            <p className="text-base sm:text-lg text-[#2d2d2d] mt-3 sm:mt-4 leading-relaxed">
-              {blog.excerpt}
-            </p>
-          </header>
+      <main className="min-h-screen overflow-x-hidden">
+        {/* ── Hero ── */}
+        <div className="blog-post-hero">
+          <div className="blog-post-hero-inner">
+            <div className="blog-hero-chip">Article &nbsp;·&nbsp; {formattedDate}</div>
+            <h1 className="blog-post-h1">{blog.title}</h1>
+            <p className="blog-post-sub">{blog.excerpt}</p>
+            <div className="blog-post-hero-bottom">
+              <div className="blog-author-row">
+                <div className="blog-av">N</div>
+                <div>
+                  <div className="blog-av-name">Neha — Yoga For Cure</div>
+                  <div className="blog-av-role">
+                    10+ years teaching&nbsp;·&nbsp;3,200+ students worldwide
+                  </div>
+                </div>
+              </div>
+              <div className="blog-hero-meta">
+                <span>{formattedDate}</span>
+                <span>Yoga For Cure</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <BlogImageCollage
-            images={blog.images.map((img) => ({
-              id: img.id,
-              url: img.url,
-              alt: img.alt || blog.title,
-            }))}
-          />
+        {/* ── Stats ── */}
+        <div className="blog-stats-bar">
+          <div className="blog-stat">
+            <span className="bst-n">3,32,000</span>
+            <span className="bst-l">YouTube Subscribers</span>
+          </div>
+          <div className="blog-stat">
+            <span className="bst-n">15,200+</span>
+            <span className="bst-l">Instagram Followers</span>
+          </div>
+          <div className="blog-stat">
+            <span className="bst-n">3,200+</span>
+            <span className="bst-l">Students Worldwide</span>
+          </div>
+          <div className="blog-stat">
+            <span className="bst-n">10+ Yrs</span>
+            <span className="bst-l">Teaching Experience</span>
+          </div>
+        </div>
 
-          <div
-            className="prose-blog text-[#2d2d2d] text-[15px] sm:text-base md:text-lg leading-relaxed space-y-4 [&_p]:mb-4 max-w-none break-words"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
-          />
+        {/* ── Article body ── */}
+        <div className="blog-post-body">
+          <div className="blog-post-container">
+            <nav className="blog-breadcrumb">
+              <Link href="/">Home</Link>
+              {" · "}
+              <Link href="/blog">Blog</Link>
+            </nav>
 
-          <footer className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-[#ede8e0]">
-            <Link
-              href="/blog"
-              className="inline-flex items-center text-[#2d5a2d] font-medium text-sm sm:text-base hover:underline"
-            >
-              ← Back to all articles
-            </Link>
-          </footer>
-        </article>
+            {blog.images.length > 0 && (
+              <div className="mb-10">
+                <BlogImageCollage
+                  images={blog.images.map((img) => ({
+                    id: img.id,
+                    url: img.url,
+                    alt: img.alt || blog.title,
+                  }))}
+                />
+              </div>
+            )}
+
+            <div
+              className="prose-blog"
+              dangerouslySetInnerHTML={{ __html: blog.content }}
+            />
+
+            <footer className="blog-post-footer">
+              <Link href="/blog" className="blog-back-link">
+                ← Back to all articles
+              </Link>
+            </footer>
+          </div>
+        </div>
       </main>
+
       <Footer />
     </>
   );

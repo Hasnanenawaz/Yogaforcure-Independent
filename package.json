@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
     "convert-images": "node scripts/convert-to-webp.js",
@@ -14,15 +14,16 @@
     "db:setup": "prisma generate && prisma db push && tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@prisma/client": "^6.9.0",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.6.1",
     "framer-motion": "^12.27.1",
     "jose": "^6.0.11",
     "lucide-react": "^0.562.0",
-    "next": "16.1.4",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "next": "^15",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

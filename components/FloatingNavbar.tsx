@@ -21,6 +21,7 @@ const navLinks = [
       { href: "#one-on-one-sessions", label: "1-on-1 Personal Sessions" },
     ],
   },
+  { href: "#courses", label: "Courses" },
   { href: "#about", label: "About" },
   { href: "#schedule", label: "Schedule" },
   { href: "#pricing", label: "Pricing" },

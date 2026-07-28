@@ -6,6 +6,7 @@ import Hero from "@/components/Hero";
 import FloatingNavbar from "@/components/FloatingNavbar";
 import HashScrollHandler from "@/components/HashScrollHandler";
 import SplashScreen from "@/components/SplashScreen";
+import ProgramsAndCourses from "@/components/sections/ProgramsAndCourses";
 import WhatWeOffer from "@/components/WhatWeOffer";
 import WhyLearnWithMe from "@/components/WhyLearnWithMe";
 import WhatYoullGain from "@/components/WhatYoullGain";
@@ -42,6 +43,7 @@ export default function HomeClient() {
             flexibility.
           </h1>
           <Hero onHeroReady={onHeroReady} />
+          <ProgramsAndCourses />
           <WhatWeOffer />
           <WhyLearnWithMe />
           <WhatYoullGain />

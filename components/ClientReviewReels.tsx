@@ -204,7 +204,7 @@ export default function ClientReviewReels() {
           <p className="text-lg sm:text-xl text-[#2d2d2d]/80 max-w-2xl mx-auto">
             Real transformation stories from our yoga community
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#9caf88] to-[#d4ddd4] mx-auto rounded-full mt-6" />
+          <div className="w-24 h-1 bg-gradient-to-r from-[#e8745b] to-[#c9a227] mx-auto rounded-full mt-6" />
         </motion.div>
 
         {/* Video Reels Grid */}

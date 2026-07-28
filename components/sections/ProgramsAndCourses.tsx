@@ -42,8 +42,8 @@ export default function ProgramsAndCourses() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20">
         <div className="flex items-center gap-2 mb-3">
-          <span className="inline-block h-px w-6 bg-[#2d5a2d]" />
-          <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#2d5a2d]">
+          <span className="inline-block h-px w-6 bg-[#e8745b]" />
+          <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
             Programs and Courses
           </span>
         </div>
@@ -93,7 +93,7 @@ export default function ProgramsAndCourses() {
                   type="button"
                   className={
                     course.variant === "solid"
-                      ? "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full bg-[#2d5a2d] text-[#faf8f5] hover:bg-[#1a3a1a] shadow-md hover:shadow-lg transition-all duration-300"
+                      ? "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full bg-[#e8745b] text-white shadow-[0_8px_20px_rgba(232,116,91,0.32)] hover:shadow-[0_14px_28px_rgba(232,116,91,0.4)] hover:-translate-y-0.5 transition-all duration-300"
                       : "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full border-2 border-[#2d5a2d] text-[#2d5a2d] hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-all duration-300"
                   }
                 >

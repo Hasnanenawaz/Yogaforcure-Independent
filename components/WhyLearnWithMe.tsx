@@ -26,7 +26,7 @@ export default function WhyLearnWithMe() {
                   />
                 </div>
               </div>
-              <p className="mt-5 w-full text-center text-sm sm:text-base font-medium text-[#9caf88] tracking-[0.2em] uppercase">
+              <p className="mt-5 w-full text-center text-sm sm:text-base font-bold text-[#e8745b] tracking-[0.2em] uppercase">
                 Neha
               </p>
             </div>

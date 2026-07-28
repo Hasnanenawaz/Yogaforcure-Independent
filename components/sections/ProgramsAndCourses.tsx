@@ -1,3 +1,5 @@
+import Reveal from "@/components/Reveal";
+
 const courses = [
   {
     tag: "Course - Sleep",
@@ -41,66 +43,67 @@ export default function ProgramsAndCourses() {
       className="relative w-full bg-[#faf8f5] py-16 sm:py-20 lg:py-[84px] scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="inline-block h-px w-6 bg-[#e8745b]" />
-          <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
-            Programs and Courses
-          </span>
-        </div>
+        <Reveal>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+            <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+              Programs and Courses
+            </span>
+          </div>
 
-        <h2 className="font-extrabold text-[#1a3a1a] text-[1.7rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] mb-4">
-          Choose the change you want to feel
-        </h2>
+          <h2 className="font-extrabold text-[#1a3a1a] text-[1.7rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] mb-4">
+            Choose the change you want to feel
+          </h2>
 
-        <p className="text-[#2d2d2d] max-w-[640px] mb-12 sm:mb-14 lg:mb-16">
-          Join live group classes, book private sessions, or learn at your own
-          pace with recorded courses. Every path includes lifetime support in
-          our community.
-        </p>
+          <p className="text-[#2d2d2d] max-w-[640px] mb-12 sm:mb-14 lg:mb-16">
+            Join live group classes, book private sessions, or learn at your
+            own pace with recorded courses. Every path includes lifetime
+            support in our community.
+          </p>
+        </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[28px]">
-          {courses.map((course) => (
-            <div
-              key={course.title}
-              className="flex flex-col bg-white border border-[#ede8e0] rounded-[20px] shadow-[0_12px_34px_rgba(27,67,50,0.10)] hover:-translate-y-[7px] hover:shadow-[0_18px_42px_rgba(27,67,50,0.16)] transition-all duration-300 overflow-hidden"
-            >
-              <div
-                className="relative h-[158px]"
-                style={{ background: course.gradient }}
-              >
-                <span className="absolute left-4 bottom-4 inline-flex items-center rounded-full bg-[#faf8f5]/[.94] text-[#1a3a1a] uppercase tracking-wide font-bold text-[0.72rem] px-[13px] py-[6px]">
-                  {course.tag}
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-[10px] p-[22px] flex-1">
-                <h3 className="font-bold text-[#2d5a2d] text-[1.1rem]">
-                  {course.title}
-                </h3>
-
-                <p className="text-[0.92rem] text-[#2d2d2d] flex-grow">
-                  {course.description}
-                </p>
-
-                <div className="flex items-center justify-between text-[0.85rem]">
-                  <span className="font-bold text-[#2d5a2d] text-[1.15rem]">
-                    {course.price}
+          {courses.map((course, index) => (
+            <Reveal key={course.title} delay={index * 0.08}>
+              <div className="flex flex-col h-full bg-white border border-[#ede8e0] rounded-[20px] shadow-[0_12px_34px_rgba(27,67,50,0.10)] hover:-translate-y-[7px] hover:shadow-[0_18px_42px_rgba(27,67,50,0.16)] transition-all duration-300 overflow-hidden">
+                <div
+                  className="relative h-[158px]"
+                  style={{ background: course.gradient }}
+                >
+                  <span className="absolute left-4 bottom-4 inline-flex items-center rounded-full bg-[#faf8f5]/[.94] text-[#1a3a1a] uppercase tracking-wide font-bold text-[0.72rem] px-[13px] py-[6px]">
+                    {course.tag}
                   </span>
-                  <span className="text-[#6b6b6b]">{course.meta}</span>
                 </div>
 
-                <button
-                  type="button"
-                  className={
-                    course.variant === "solid"
-                      ? "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full bg-[#e8745b] text-white shadow-[0_8px_20px_rgba(232,116,91,0.32)] hover:shadow-[0_14px_28px_rgba(232,116,91,0.4)] hover:-translate-y-0.5 transition-all duration-300"
-                      : "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full border-2 border-[#2d5a2d] text-[#2d5a2d] hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-all duration-300"
-                  }
-                >
-                  {course.cta}
-                </button>
+                <div className="flex flex-col gap-[10px] p-[22px] flex-1">
+                  <h3 className="font-bold text-[#2d5a2d] text-[1.1rem]">
+                    {course.title}
+                  </h3>
+
+                  <p className="text-[0.92rem] text-[#2d2d2d] flex-grow">
+                    {course.description}
+                  </p>
+
+                  <div className="flex items-center justify-between text-[0.85rem]">
+                    <span className="font-bold text-[#2d5a2d] text-[1.15rem]">
+                      {course.price}
+                    </span>
+                    <span className="text-[#6b6b6b]">{course.meta}</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    className={
+                      course.variant === "solid"
+                        ? "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full bg-[#e8745b] text-white shadow-[0_8px_20px_rgba(232,116,91,0.32)] hover:shadow-[0_14px_28px_rgba(232,116,91,0.4)] hover:-translate-y-0.5 transition-all duration-300"
+                        : "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full border-2 border-[#2d5a2d] text-[#2d5a2d] hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-all duration-300"
+                    }
+                  >
+                    {course.cta}
+                  </button>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -11,22 +11,22 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto text-center flex flex-col items-center justify-center">
         {/* Internal links */}
         <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mb-4 text-sm sm:text-base" aria-label="Footer navigation">
-          <Link href="/#why-learn-with-me" className="text-[#faf8f5] hover:text-[#9caf88] transition-colors">
+          <Link href="/#why-learn-with-me" className="text-[#faf8f5] hover:text-[#e8745b] transition-colors">
             About
           </Link>
-          <Link href="/#what-we-offer" className="text-[#faf8f5] hover:text-[#9caf88] transition-colors">
+          <Link href="/#what-we-offer" className="text-[#faf8f5] hover:text-[#e8745b] transition-colors">
             Programs
           </Link>
-          <Link href="/#weekly-live-sessions" className="text-[#faf8f5] hover:text-[#9caf88] transition-colors">
+          <Link href="/#weekly-live-sessions" className="text-[#faf8f5] hover:text-[#e8745b] transition-colors">
             Schedule
           </Link>
-          <Link href="/#pricing" className="text-[#faf8f5] hover:text-[#9caf88] transition-colors">
+          <Link href="/#pricing" className="text-[#faf8f5] hover:text-[#e8745b] transition-colors">
             Pricing
           </Link>
-          <Link href="/gallery" className="text-[#faf8f5] hover:text-[#9caf88] transition-colors">
+          <Link href="/gallery" className="text-[#faf8f5] hover:text-[#e8745b] transition-colors">
             Gallery
           </Link>
-          <Link href="/blog" className="text-[#faf8f5] hover:text-[#9caf88] transition-colors">
+          <Link href="/blog" className="text-[#faf8f5] hover:text-[#e8745b] transition-colors">
             Blog
           </Link>
         </nav>
@@ -34,7 +34,7 @@ export default function Footer() {
           © {currentYear} Yoga for Cure
         </p>
         <p className="text-xs sm:text-sm mt-2 text-[#9caf88]">
-          Made with <span className="text-[#e8b4a0]">♥</span> by Yoga for Cure
+          Made with <span className="text-[#e8745b]">♥</span> by Yoga for Cure
         </p>
         
         {/* Social Media Links */}

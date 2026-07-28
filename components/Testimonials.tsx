@@ -133,7 +133,7 @@ export default function Testimonials() {
           transition={{ duration: 0.7 }}
           className="text-center mb-12 lg:mb-16"
         >
-          <p className="text-xs tracking-[0.2em] uppercase text-[#909090]">
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#e8745b]">
             Testimonials
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">

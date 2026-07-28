@@ -14,11 +14,16 @@
   
   /* Accent Color */
   --muted-blush-pink: #e8b4a0;
-  
+  --coral: #e8745b;
+  --coral-soft: #fbe3dc;
+  --gold: #c9a227;
+  --gold-soft: #f6edcf;
+  --sage-soft: #e4eee7;
+
   /* Text Colors */
   --dark-green: #1a3a1a;
   --charcoal: #2d2d2d;
-  
+
   /* Background */
   --background: var(--cream);
   --foreground: var(--dark-green);
@@ -29,6 +34,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-poppins), sans-serif;
 }
 
 html {

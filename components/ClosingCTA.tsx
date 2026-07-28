@@ -12,9 +12,13 @@ export default function ClosingCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#f5f1eb] py-16 sm:py-20 md:py-24 lg:py-32"
+      className="relative w-full overflow-hidden bg-[#1a3a1a] py-16 sm:py-20 md:py-24 lg:py-32"
     >
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      {/* Decorative circles */}
+      <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#2d5a2d]" />
+      <div className="pointer-events-none absolute right-16 -bottom-32 h-56 w-56 rounded-full bg-[#e8745b]/35" />
+
+      <div className="relative max-w-4xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -26,7 +30,7 @@ export default function ClosingCTA() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1a3a1a] leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#faf8f5] leading-tight"
           >
             Ready to move better and feel stronger?
           </motion.h2>
@@ -36,10 +40,10 @@ export default function ClosingCTA() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-[#2d2d2d] leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-[#f5f1eb] leading-relaxed"
           >
             Book your consultation or join the program today.{" "}
-            <Link href="/#pricing" className="text-[#2d5a2d] hover:text-[#1a3a1a] font-medium no-underline">
+            <Link href="/#pricing" className="text-[#e8745b] hover:text-[#f0906f] font-medium no-underline">
               View pricing
             </Link>
           </motion.p>
@@ -51,10 +55,10 @@ export default function ClosingCTA() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="space-y-4 pt-4"
           >
-            <p className="text-base sm:text-lg md:text-xl text-[#2d2d2d] leading-relaxed italic max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-[#f5f1eb]/80 leading-relaxed italic max-w-2xl mx-auto">
               Your body is always responding to what you do — or what you avoid.
             </p>
-            <p className="text-base sm:text-lg md:text-xl text-[#2d2d2d] leading-relaxed italic max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-[#f5f1eb]/80 leading-relaxed italic max-w-2xl mx-auto">
               If practice has been on your mind for a while, maybe it's time to begin.
             </p>
           </motion.div>
@@ -70,7 +74,7 @@ export default function ClosingCTA() {
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-3.5 sm:px-10 sm:py-4 bg-[#2d5a2d] text-[#faf8f5] font-semibold rounded-full shadow-md hover:shadow-lg hover:bg-[#1a3a1a] transition-all duration-300 text-base sm:text-lg"
+              className="inline-flex items-center justify-center px-8 py-3.5 sm:px-10 sm:py-4 bg-[#e8745b] text-white font-semibold rounded-full shadow-[0_8px_20px_rgba(232,116,91,0.32)] hover:shadow-[0_14px_28px_rgba(232,116,91,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-base sm:text-lg"
             >
               Book Consultation
             </Link>
@@ -78,7 +82,7 @@ export default function ClosingCTA() {
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-3.5 sm:px-10 sm:py-4 bg-transparent border-2 border-[#9caf88] text-[#2d5a2d] font-semibold rounded-full hover:bg-[#9caf88]/10 transition-all duration-300 text-base sm:text-lg"
+              className="inline-flex items-center justify-center px-8 py-3.5 sm:px-10 sm:py-4 bg-transparent border-2 border-[#f5f1eb]/40 text-[#faf8f5] font-semibold rounded-full hover:bg-white/10 transition-all duration-300 text-base sm:text-lg"
             >
               Join Program
             </Link>

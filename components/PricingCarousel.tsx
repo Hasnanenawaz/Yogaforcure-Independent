@@ -260,7 +260,7 @@ export default function PricingCarousel() {
                     >
                       {plan.badge ? (
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                          <span className="inline-flex items-center rounded-full bg-[#9caf88]/60 text-[#1a3a1a] text-[11px] sm:text-xs font-semibold px-3 py-1 tracking-wide">
+                          <span className="inline-flex items-center rounded-full bg-[#f6edcf] text-[#c9a227] text-[11px] sm:text-xs font-bold px-3 py-1 tracking-wide">
                             {plan.badge}
                           </span>
                         </div>

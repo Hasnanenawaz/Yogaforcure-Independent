@@ -113,7 +113,7 @@ export default function CallModal({ isOpen, onClose }: CallModalProps) {
 
                   <button
                     onClick={onClose}
-                    className="flex-1 px-6 py-3 bg-transparent border-2 border-[#9caf88] text-[#2d5a2d] font-semibold rounded-full hover:bg-[#9caf88]/10 transition-all duration-300"
+                    className="flex-1 px-6 py-3 bg-transparent border-2 border-[#2d5a2d] text-[#2d5a2d] font-semibold rounded-full hover:bg-[#e4eee7] transition-all duration-300"
                   >
                     Close
                   </button>

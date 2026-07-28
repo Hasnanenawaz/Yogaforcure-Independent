@@ -83,14 +83,14 @@ export default function WhatWeOffer() {
             self-paced online yoga programs — all taught in clear English.{" "}
             <Link
               href="/#pricing"
-              className="text-[#2d5a2d] hover:text-[#1a3a1a] font-medium no-underline"
+              className="text-[#e8745b] hover:text-[#f0906f] font-medium no-underline"
             >
               View pricing
             </Link>
             {" · "}
             <Link
               href="/#weekly-live-sessions"
-              className="text-[#2d5a2d] hover:text-[#1a3a1a] font-medium no-underline"
+              className="text-[#e8745b] hover:text-[#f0906f] font-medium no-underline"
             >
               View schedule
             </Link>
@@ -172,7 +172,7 @@ export default function WhatWeOffer() {
                       <button
                         type="button"
                         onClick={() => toggleExpanded(offering.id)}
-                        className="text-[#2d5a2d] hover:text-[#1a3a1a] font-medium text-sm"
+                        className="text-[#e8745b] hover:text-[#f0906f] font-medium text-sm"
                         aria-expanded={isExpanded}
                       >
                         {isExpanded ? "Show less" : "Learn more"}

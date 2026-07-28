@@ -58,16 +58,16 @@ export default function Hero({ onHeroReady }: HeroProps) {
           {/* Copy */}
           <div className="flex flex-col justify-center text-center lg:text-left lg:max-w-xl lg:mx-0 order-1 lg:h-full lg:py-4">
             <div className="mb-2 sm:mb-3 flex justify-center lg:justify-start">
-              <span className="inline-flex items-center justify-center w-9 h-9 bg-green-100/90 lg:bg-green-100/90 rounded-full">
-                <Leaf className="w-5 h-5 text-green-600" />
+              <span className="inline-flex items-center justify-center w-9 h-9 bg-[#e4eee7]/90 rounded-full">
+                <Leaf className="w-5 h-5 text-[#40916C]" />
               </span>
             </div>
 
             <h2 className="text-[2rem] leading-[1.12] sm:text-4xl md:text-[2.65rem] lg:text-[2.5rem] xl:text-[2.85rem] 2xl:text-5xl font-bold text-white lg:text-gray-900 mb-3 sm:mb-4">
               Build{" "}
-              <span className="text-[#51e17a] lg:text-[#2d5a2d]">strength</span>
+              <span className="text-[#51e17a] lg:text-[#40916C]">strength</span>
               . Improve{" "}
-              <span className="text-[#51e17a] lg:text-[#2d5a2d]">
+              <span className="text-[#51e17a] lg:text-[#40916C]">
                 flexibility
               </span>
               .
@@ -83,7 +83,7 @@ export default function Hero({ onHeroReady }: HeroProps) {
                 href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#2d5a2d] hover:bg-[#1a3a1a] text-white px-6 py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base transition-colors shadow-md shadow-green-900/10"
+                className="inline-flex items-center justify-center bg-[#e8745b] text-white px-6 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 shadow-[0_8px_20px_rgba(232,116,91,0.32)] hover:shadow-[0_14px_28px_rgba(232,116,91,0.4)] hover:-translate-y-0.5"
               >
                 Join Class
               </Link>
@@ -91,7 +91,7 @@ export default function Hero({ onHeroReady }: HeroProps) {
                 href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-white/95 hover:bg-white text-[#2d5a2d] lg:bg-white lg:hover:bg-[#faf8f5] border border-white/30 lg:border-[#2d5a2d]/25 px-6 py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base transition-colors"
+                className="inline-flex items-center justify-center bg-white/95 hover:bg-white text-[#2d5a2d] lg:bg-white lg:hover:bg-[#e4eee7] border border-white/30 lg:border-[#2d5a2d]/40 px-6 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-300"
               >
                 Book a Consultation
               </Link>

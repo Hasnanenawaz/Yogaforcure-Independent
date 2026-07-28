@@ -1,40 +1,23 @@
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { courses } from "@/lib/courses";
 
-const courses = [
-  {
-    tag: "Course - Sleep",
-    gradient: "linear-gradient(140deg,#1B4332,#40916C)",
-    title: "Sleep Reset: 21 nights to deeper rest",
-    description:
-      "Wind down sequences and breath pacing that train your body to switch off. Practice each night from home.",
-    price: "Rs. 1,999",
-    meta: "24 lessons, lifetime access",
-    cta: "View course",
-    variant: "solid" as const,
-  },
-  {
-    tag: "Course - Stress",
-    gradient: "linear-gradient(140deg,#2D6A4F,#95B8A6)",
-    title: "Calm Under Pressure for busy professionals",
-    description:
-      "Short daily practices for the workday: desk release, box breathing, and a 10 minute reset between meetings.",
-    price: "Rs. 2,499",
-    meta: "30 lessons, lifetime access",
-    cta: "View course",
-    variant: "outline" as const,
-  },
-  {
-    tag: "Live - Group classes",
-    gradient: "linear-gradient(140deg,#8C6A1D,#C9A227)",
-    title: "Live online group classes",
-    description:
-      "Practice together on Zoom, mornings and evenings IST, with timings shared for the UK and Singapore too.",
-    price: "From Rs. 2,000/mo",
-    meta: "See schedule",
-    cta: "See the schedule",
-    variant: "outline" as const,
-  },
-];
+const liveClasses = {
+  tag: "Live - Group classes",
+  gradient: "linear-gradient(140deg,#8C6A1D,#C9A227)",
+  title: "Live online group classes",
+  description:
+    "Practice together on Zoom, mornings and evenings IST, with timings shared for the UK and Singapore too.",
+  price: "From Rs. 2,000/mo",
+  meta: "See schedule",
+  cta: "See the schedule",
+  variant: "outline" as const,
+};
+
+const cardButtonClass = (variant: "solid" | "outline") =>
+  variant === "solid"
+    ? "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full bg-[#e8745b] text-white shadow-[0_8px_20px_rgba(232,116,91,0.32)] hover:shadow-[0_14px_28px_rgba(232,116,91,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
+    : "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full border-2 border-[#2d5a2d] text-[#2d5a2d] hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-all duration-300 text-center";
 
 export default function ProgramsAndCourses() {
   return (
@@ -64,7 +47,7 @@ export default function ProgramsAndCourses() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[28px]">
           {courses.map((course, index) => (
-            <Reveal key={course.title} delay={index * 0.08}>
+            <Reveal key={course.slug} delay={index * 0.08}>
               <div className="flex flex-col h-full bg-white border border-[#ede8e0] rounded-[20px] shadow-[0_12px_34px_rgba(27,67,50,0.10)] hover:-translate-y-[7px] hover:shadow-[0_18px_42px_rgba(27,67,50,0.16)] transition-all duration-300 overflow-hidden">
                 <div
                   className="relative h-[158px]"
@@ -91,20 +74,53 @@ export default function ProgramsAndCourses() {
                     <span className="text-[#6b6b6b]">{course.meta}</span>
                   </div>
 
-                  <button
-                    type="button"
-                    className={
-                      course.variant === "solid"
-                        ? "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full bg-[#e8745b] text-white shadow-[0_8px_20px_rgba(232,116,91,0.32)] hover:shadow-[0_14px_28px_rgba(232,116,91,0.4)] hover:-translate-y-0.5 transition-all duration-300"
-                        : "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full border-2 border-[#2d5a2d] text-[#2d5a2d] hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-all duration-300"
-                    }
+                  <Link
+                    href={`/courses/${course.slug}`}
+                    className={cardButtonClass(course.variant)}
                   >
                     {course.cta}
-                  </button>
+                  </Link>
                 </div>
               </div>
             </Reveal>
           ))}
+
+          <Reveal delay={courses.length * 0.08}>
+            <div className="flex flex-col h-full bg-white border border-[#ede8e0] rounded-[20px] shadow-[0_12px_34px_rgba(27,67,50,0.10)] hover:-translate-y-[7px] hover:shadow-[0_18px_42px_rgba(27,67,50,0.16)] transition-all duration-300 overflow-hidden">
+              <div
+                className="relative h-[158px]"
+                style={{ background: liveClasses.gradient }}
+              >
+                <span className="absolute left-4 bottom-4 inline-flex items-center rounded-full bg-[#faf8f5]/[.94] text-[#1a3a1a] uppercase tracking-wide font-bold text-[0.72rem] px-[13px] py-[6px]">
+                  {liveClasses.tag}
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-[10px] p-[22px] flex-1">
+                <h3 className="font-bold text-[#2d5a2d] text-[1.1rem]">
+                  {liveClasses.title}
+                </h3>
+
+                <p className="text-[0.92rem] text-[#2d2d2d] flex-grow">
+                  {liveClasses.description}
+                </p>
+
+                <div className="flex items-center justify-between text-[0.85rem]">
+                  <span className="font-bold text-[#2d5a2d] text-[1.15rem]">
+                    {liveClasses.price}
+                  </span>
+                  <span className="text-[#6b6b6b]">{liveClasses.meta}</span>
+                </div>
+
+                <button
+                  type="button"
+                  className={cardButtonClass(liveClasses.variant)}
+                >
+                  {liveClasses.cta}
+                </button>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -161,7 +161,7 @@ export default function FloatingNavbar() {
                   className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
                   priority
                 />
-                <span className="text-base sm:text-lg md:text-xl font-semibold text-[#1a3a1a] group-hover:text-[#2d5a2d] transition-colors whitespace-nowrap">
+                <span className="font-[family-name:var(--font-poppins)] text-base sm:text-lg md:text-xl font-bold text-[#1a3a1a] group-hover:text-[#2d5a2d] transition-colors whitespace-nowrap">
                   Yoga for Cure
                 </span>
               </motion.div>
@@ -233,6 +233,7 @@ export default function FloatingNavbar() {
                       className="relative px-3 py-2 text-[#1a3a1a] font-medium hover:text-[#2d5a2d] transition-colors rounded-full group whitespace-nowrap"
                     >
                       {link.label}
+                      <span className="absolute bottom-1 left-3 right-3 h-0.5 bg-[#e8745b] rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
                     </Link>
                   )}
                 </div>

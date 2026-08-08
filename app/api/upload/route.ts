@@ -15,8 +15,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
+    const folder = String(formData.get("folder") || "yoga-blogs");
+
     const buffer = Buffer.from(await file.arrayBuffer());
-    const result = await uploadToCloudinary(buffer);
+    const result = await uploadToCloudinary(buffer, folder);
 
     return NextResponse.json(result);
   } catch (error) {

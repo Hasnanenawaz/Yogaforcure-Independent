@@ -23,11 +23,12 @@ export async function PUT(request: Request, context: RouteContext) {
     }
 
     const data = { ...body, slug } as unknown as Prisma.InputJsonValue;
+    const title = body.title ? String(body.title) : undefined;
 
     await prisma.course.upsert({
       where: { slug },
-      update: { data },
-      create: { slug, data },
+      update: { data, ...(title ? { title } : {}) },
+      create: { slug, data, title },
     });
 
     revalidateCoursePaths(slug);

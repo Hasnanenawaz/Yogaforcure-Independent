@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LogOut, Plus, LayoutDashboard, Users } from "lucide-react";
+import { LogOut, Plus, LayoutDashboard, Users, BookOpen, Newspaper } from "lucide-react";
 
 export default function AdminDashboardShell({
   email,
@@ -25,10 +25,19 @@ export default function AdminDashboardShell({
         <div className="max-w-6xl mx-auto px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <LayoutDashboard className="w-5 h-5 text-[#9caf88] shrink-0" />
-            <span className="font-semibold text-sm sm:text-base">Blog Admin</span>
+            <Link href="/admin/dashboard" className="font-semibold text-sm sm:text-base">
+              Admin
+            </Link>
             <span className="text-[#9caf88] text-xs sm:text-sm truncate">{email}</span>
           </div>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <Link
+              href="/admin/dashboard/courses"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg border border-[#9caf88]/40 text-sm hover:bg-[#2d5a2d] transition-colors"
+            >
+              <BookOpen className="w-4 h-4" />
+              Courses
+            </Link>
             <Link
               href="/admin/dashboard/students"
               className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg border border-[#9caf88]/40 text-sm hover:bg-[#2d5a2d] transition-colors"
@@ -42,6 +51,13 @@ export default function AdminDashboardShell({
             >
               <Users className="w-4 h-4" />
               Enrollments
+            </Link>
+            <Link
+              href="/admin/dashboard/blogs"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg border border-[#9caf88]/40 text-sm hover:bg-[#2d5a2d] transition-colors"
+            >
+              <Newspaper className="w-4 h-4" />
+              Blogs
             </Link>
             <Link
               href="/admin/dashboard/blogs/new"

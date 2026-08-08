@@ -384,10 +384,52 @@ export const seedCourses: Course[] = [
   },
 ];
 
+export function emptyCourseData(slug: string, title: string): Course {
+  return {
+    slug,
+    tag: "",
+    gradient: "linear-gradient(140deg,#1B4332,#40916C)",
+    title,
+    description: "",
+    price: "",
+    priceValue: 0,
+    wasPrice: "",
+    savePercent: 0,
+    meta: "",
+    duration: "",
+    level: "",
+    format: "",
+    cta: "View course",
+    variant: "solid",
+    rating: 0,
+    reviewCount: 0,
+    timeRequiredIso: "",
+    heroLead: "",
+    heroMeta: [],
+    coverKicker: "",
+    coverHeading: "",
+    coverDescription: "",
+    coverStats: [],
+    introVideo: { heading: "", description: "", instructorLine: "", lengthLabel: "" },
+    about: [],
+    highlights: [],
+    curriculum: [],
+    whoItsFor: [],
+    instructorNote: "",
+    testimonials: [],
+    faq: [],
+    includes: [],
+  };
+}
+
 export async function getAllCourses(): Promise<Course[]> {
   try {
     const rows = await prisma.course.findMany({ orderBy: { createdAt: "asc" } });
-    if (rows.length > 0) return rows.map((row) => row.data as unknown as Course);
+    if (rows.length > 0) {
+      return rows.map(
+        (row) => (row.data as unknown as Course) ?? emptyCourseData(row.slug, row.title || row.slug),
+      );
+    }
   } catch {
     // Course table not migrated yet, or DB unreachable — serve the defaults below.
   }
@@ -397,7 +439,7 @@ export async function getAllCourses(): Promise<Course[]> {
 export async function getCourseBySlug(slug: string): Promise<Course | undefined> {
   try {
     const row = await prisma.course.findUnique({ where: { slug } });
-    if (row) return row.data as unknown as Course;
+    if (row) return (row.data as unknown as Course) ?? emptyCourseData(row.slug, row.title || row.slug);
   } catch {
     // Course table not migrated yet, or DB unreachable — fall back below.
   }

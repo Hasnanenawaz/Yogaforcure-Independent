@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getStudentSession } from "@/lib/studentAuth";
+import StudentDashboardShell from "@/components/StudentDashboardShell";
 
 export const metadata = {
   title: "My Courses — Yoga for Cure",
@@ -14,5 +15,5 @@ export default async function LearnLayout({
   const session = await getStudentSession();
   if (!session) redirect("/login");
 
-  return <>{children}</>;
+  return <StudentDashboardShell name={session.name}>{children}</StudentDashboardShell>;
 }

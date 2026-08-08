@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, User, LogOut } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import CallModal from "./CallModal";
+
+type StudentInfo = { name: string; email: string };
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -35,9 +37,25 @@ export default function FloatingNavbar() {
   const [isPastHero, setIsPastHero] = useState(false);
   const [isCallModalOpen, setIsCallModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [student, setStudent] = useState<StudentInfo | null>(null);
   const { scrollY } = useScroll();
   const router = useRouter();
   const pathname = usePathname();
+
+  useEffect(() => {
+    fetch("/api/student/me")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => setStudent(data?.student ?? null))
+      .catch(() => setStudent(null));
+  }, []);
+
+  async function handleLogout() {
+    await fetch("/api/student/logout", { method: "POST" });
+    setStudent(null);
+    setIsMobileMenuOpen(false);
+    router.push("/");
+    router.refresh();
+  }
 
   // Detect mobile device
   useEffect(() => {
@@ -242,6 +260,32 @@ export default function FloatingNavbar() {
 
             {/* Desktop CTA Buttons */}
             <motion.div className="hidden lg:flex items-center gap-2 shrink-0">
+              {student ? (
+                <>
+                  <Link
+                    href="/learn"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 border border-[#2d5a2d] text-[#2d5a2d] font-medium rounded-full hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-colors duration-300 whitespace-nowrap text-sm"
+                  >
+                    <User className="w-4 h-4" />
+                    {student.name.split(" ")[0]}
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    aria-label="Log out"
+                    className="p-2 rounded-full text-[#1a3a1a] hover:bg-[#e8ede8]/40 transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className="inline-flex items-center px-4 py-2 border border-[#2d5a2d] text-[#2d5a2d] font-medium rounded-full hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-colors duration-300 whitespace-nowrap text-sm"
+                >
+                  Log in
+                </Link>
+              )}
               <button
                 onClick={() => {
                   if (isMobile) {
@@ -389,6 +433,34 @@ export default function FloatingNavbar() {
 
                 {/* Mobile CTA Buttons */}
                 <div className="px-6 pb-6 space-y-3">
+                  {student ? (
+                    <>
+                      <Link
+                        href="/learn"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="w-full flex items-center justify-center gap-2 px-6 py-3.5 border border-[#2d5a2d] text-[#2d5a2d] font-semibold rounded-full hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-colors duration-300"
+                      >
+                        <User className="w-5 h-5" />
+                        My Courses
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        className="w-full flex items-center justify-center gap-2 px-6 py-3 text-[#6b6b6b] font-medium hover:text-[#1a3a1a] transition-colors"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Log out
+                      </button>
+                    </>
+                  ) : (
+                    <Link
+                      href="/login"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3.5 border border-[#2d5a2d] text-[#2d5a2d] font-semibold rounded-full hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-colors duration-300"
+                    >
+                      Log in
+                    </Link>
+                  )}
                   <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);

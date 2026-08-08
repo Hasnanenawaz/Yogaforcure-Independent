@@ -2,10 +2,7 @@ import Link from "next/link";
 import { getStudentSession } from "@/lib/studentAuth";
 import { prisma } from "@/lib/prisma";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
-
-function courseTitle(course: { title: string | null; data: unknown; slug: string }) {
-  return course.title || (course.data as { title?: string } | null)?.title || course.slug;
-}
+import { courseDisplayTitle } from "@/lib/courses";
 
 export default async function LearnDashboardPage() {
   const session = await getStudentSession();
@@ -14,17 +11,14 @@ export default async function LearnDashboardPage() {
   const enrollments = await prisma.enrollment.findMany({
     where: { studentId: session.studentId },
     orderBy: { createdAt: "desc" },
-    include: { course: { include: { _count: { select: { lessons: true } } } } },
+    include: { course: { include: { lessons: { orderBy: { orderNumber: "asc" } } } } },
   });
 
   const completedProgress = await prisma.lessonProgress.findMany({
     where: { studentId: session.studentId, isCompleted: true },
-    include: { lesson: { select: { courseId: true } } },
+    select: { lessonId: true },
   });
-  const completedByCourse = new Map<string, number>();
-  for (const p of completedProgress) {
-    completedByCourse.set(p.lesson.courseId, (completedByCourse.get(p.lesson.courseId) ?? 0) + 1);
-  }
+  const completedLessonIds = new Set(completedProgress.map((p) => p.lessonId));
 
   return (
     <div>
@@ -52,9 +46,12 @@ export default async function LearnDashboardPage() {
         <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
           {enrollments.map((enrollment) => {
             const course = enrollment.course;
-            const total = course._count.lessons;
-            const completed = completedByCourse.get(course.id) ?? 0;
+            const lessons = course.lessons;
+            const total = lessons.length;
+            const completed = lessons.filter((l) => completedLessonIds.has(l.id)).length;
             const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+            const targetLesson =
+              lessons.find((l) => !completedLessonIds.has(l.id)) ?? lessons[lessons.length - 1];
 
             return (
               <article
@@ -74,7 +71,7 @@ export default async function LearnDashboardPage() {
                   )}
                   <div className="min-w-0">
                     <h2 className="font-semibold text-[#1a3a1a] truncate">
-                      {courseTitle(course)}
+                      {courseDisplayTitle(course)}
                     </h2>
                     <p className="text-xs text-[#6b6b6b] mt-1">
                       {total > 0 ? `${completed} of ${total} lessons complete` : "No lessons yet"}
@@ -92,7 +89,11 @@ export default async function LearnDashboardPage() {
                 )}
 
                 <Link
-                  href={`/courses/${course.slug}`}
+                  href={
+                    targetLesson
+                      ? `/learn/${course.slug}/${targetLesson.slug}`
+                      : `/courses/${course.slug}`
+                  }
                   className="mt-1 inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#2d5a2d] text-white text-sm font-medium hover:bg-[#1a3a1a] transition-colors"
                 >
                   Continue

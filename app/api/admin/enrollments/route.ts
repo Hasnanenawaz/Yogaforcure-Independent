@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { courseDisplayTitle } from "@/lib/courses";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function courseTitle(course: { title: string | null; data: unknown; slug: string }) {
-  return course.title || (course.data as { title?: string } | null)?.title || course.slug;
-}
 
 export async function GET() {
   const session = await requireAdmin();
@@ -25,7 +22,7 @@ export async function GET() {
     email: r.student.email,
     studentName: r.student.name,
     courseId: r.courseId,
-    courseTitle: courseTitle(r.course),
+    courseTitle: courseDisplayTitle(r.course),
     createdAt: r.createdAt,
   }));
 

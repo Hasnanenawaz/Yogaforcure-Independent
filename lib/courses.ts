@@ -384,6 +384,10 @@ export const seedCourses: Course[] = [
   },
 ];
 
+export function courseDisplayTitle(course: { title: string | null; data: unknown; slug: string }): string {
+  return course.title || (course.data as { title?: string } | null)?.title || course.slug;
+}
+
 export function emptyCourseData(slug: string, title: string): Course {
   return {
     slug,

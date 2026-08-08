@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { courses } from "@/lib/courses";
+import type { Course } from "@/lib/courses";
 
 const liveClasses = {
   tag: "Live - Group classes",
@@ -19,7 +19,7 @@ const cardButtonClass = (variant: "solid" | "outline") =>
     ? "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full bg-[#e8745b] text-white shadow-[0_8px_20px_rgba(232,116,91,0.32)] hover:shadow-[0_14px_28px_rgba(232,116,91,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
     : "w-full font-semibold text-[0.93rem] px-6 py-3 rounded-full border-2 border-[#2d5a2d] text-[#2d5a2d] hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-all duration-300 text-center";
 
-export default function ProgramsAndCourses() {
+export default function ProgramsAndCourses({ courses }: { courses: Course[] }) {
   return (
     <section
       id="courses"

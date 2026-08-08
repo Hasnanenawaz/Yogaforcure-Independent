@@ -7,9 +7,20 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function AdminPage() {
+type Props = { searchParams: Promise<{ redirect?: string }> };
+
+function safeRedirect(target: string | undefined): string | undefined {
+  if (!target) return undefined;
+  if (!target.startsWith("/") || target.startsWith("//")) return undefined;
+  return target;
+}
+
+export default async function AdminPage({ searchParams }: Props) {
+  const { redirect: redirectParam } = await searchParams;
+  const redirectTo = safeRedirect(redirectParam);
+
   const session = await getSession();
-  if (session) redirect("/admin/dashboard");
+  if (session) redirect(redirectTo || "/admin/dashboard");
 
   return (
     <div className="min-h-screen bg-[#f5f1eb] flex items-center justify-center px-4">
@@ -18,7 +29,7 @@ export default async function AdminPage() {
           <h1 className="text-2xl font-semibold text-[#1a3a1a]">Admin Login</h1>
           <p className="text-[#2d2d2d] text-sm mt-2">Yoga for Cure — Blog dashboard</p>
         </div>
-        <AdminLoginForm />
+        <AdminLoginForm redirectTo={redirectTo} />
       </div>
     </div>
   );

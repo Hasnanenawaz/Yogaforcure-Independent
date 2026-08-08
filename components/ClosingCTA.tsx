@@ -25,12 +25,26 @@ export default function ClosingCTA() {
           transition={{ duration: 0.8 }}
           className="text-center space-y-8 sm:space-y-10"
         >
+          {/* Eyebrow */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8 }}
+            className="flex items-center justify-center gap-2"
+          >
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+            <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+              Get Started
+            </span>
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+          </motion.div>
+
           {/* Main Question */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#faf8f5] leading-tight"
+            className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#faf8f5]"
           >
             Ready to move better and feel stronger?
           </motion.h2>

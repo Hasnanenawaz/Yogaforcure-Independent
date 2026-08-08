@@ -23,6 +23,14 @@
   /* Text Colors */
   --dark-green: #1a3a1a;
   --charcoal: #2d2d2d;
+  --muted-gray: #6b6b6b;
+
+  /* Tonal variants (consolidated from repeated ad-hoc hex) */
+  --sage-mist: #d4ddd4;
+  --sage-hover: #e8ede8;
+  --coral-light: #f0906f;
+  --forest-deep: #0f2e20;
+  --amber-dark: #8c6a1d;
 
   /* Background */
   --background: var(--cream);

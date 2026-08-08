@@ -321,20 +321,23 @@ export default function GalleryPage() {
               transition={{ duration: 0.6 }}
               className="text-center mb-12 lg:mb-16"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#1a3a1a] mb-4">
-                Gallery
-              </h1>
-              <p className="text-lg sm:text-xl text-[#2d2d2d] max-w-2xl mx-auto">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <span className="inline-block h-px w-6 bg-[#e8745b]" />
+                <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+                  Gallery
+                </span>
+                <span className="inline-block h-px w-6 bg-[#e8745b]" />
+              </div>
+              <h1 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#1a3a1a] mb-4">
                 Moments from practice
-              </p>
-              <p className="mt-4 text-base text-[#2d2d2d]">
+              </h1>
+              <p className="text-base text-[#2d2d2d]">
                 <a href="/" className="text-[#2d5a2d] hover:text-[#1a3a1a] font-medium underline underline-offset-2">Home</a>
                 {" · "}
                 <a href="/#what-we-offer" className="text-[#2d5a2d] hover:text-[#1a3a1a] font-medium underline underline-offset-2">Programs</a>
                 {" · "}
                 <a href="/#pricing" className="text-[#2d5a2d] hover:text-[#1a3a1a] font-medium underline underline-offset-2">Pricing</a>
               </p>
-              <div className="w-24 h-1 bg-gradient-to-r from-[#9caf88] to-[#d4ddd4] mx-auto rounded-full mt-6" />
             </motion.div>
 
             <div ref={containerRef} className="w-full">

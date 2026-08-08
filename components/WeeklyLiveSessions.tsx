@@ -12,7 +12,14 @@ export default function WeeklyLiveSessions() {
     >
       <div className="max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <header className="text-center mb-10 sm:mb-14 lg:mb-16">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-[#faf8f5] mb-4">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+            <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+              Schedule
+            </span>
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+          </div>
+          <h2 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#faf8f5] mb-4">
             Weekly Live Schedule
           </h2>
         </header>

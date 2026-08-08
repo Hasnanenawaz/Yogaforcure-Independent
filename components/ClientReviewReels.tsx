@@ -198,13 +198,19 @@ export default function ClientReviewReels() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 lg:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1a3a1a] mb-4">
-            Client Reviews
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+            <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+              Client Reviews
+            </span>
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+          </div>
+          <h2 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#1a3a1a] mb-4">
+            Real stories, real transformations
           </h2>
-          <p className="text-lg sm:text-xl text-[#2d2d2d]/80 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#2d2d2d]/80 max-w-2xl mx-auto">
             Real transformation stories from our yoga community
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#e8745b] to-[#c9a227] mx-auto rounded-full mt-6" />
         </motion.div>
 
         {/* Video Reels Grid */}

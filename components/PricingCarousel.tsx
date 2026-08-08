@@ -137,10 +137,17 @@ export default function PricingCarousel() {
     <section className="relative w-full bg-[#f5f1eb] py-16 sm:py-20 md:py-24 lg:py-28">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20">
         <div className="text-center mb-10 sm:mb-12">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-[#1a3a1a] mb-3">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+            <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+              Pricing
+            </span>
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+          </div>
+          <h2 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#1a3a1a] mb-3">
             Pricing for group sessions
           </h2>
-          <p className="text-lg sm:text-xl md:text-2xl text-[#2d2d2d] max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-[#2d2d2d] max-w-3xl mx-auto leading-relaxed">
             Choose the plan that supports your consistency.
           </p>
         </div>

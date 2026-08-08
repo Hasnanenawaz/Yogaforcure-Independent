@@ -1,3 +1,5 @@
+import { prisma } from "@/lib/prisma";
+
 export type Lesson = { title: string; duration: string };
 export type Module = { title: string; subtitle: string; lessons: Lesson[] };
 export type WhoCard = { title: string; description: string };
@@ -53,7 +55,7 @@ export const instructor = {
   bio: "Neha has taught yoga for over 10 years, guiding students in India, the UK, Singapore, and beyond. She teaches in clear, fluent English, with a warm, unhurried style that meets people exactly where they are.",
 };
 
-export const courses: Course[] = [
+export const seedCourses: Course[] = [
   {
     slug: "sleep-reset",
     tag: "Course - Sleep",
@@ -382,6 +384,22 @@ export const courses: Course[] = [
   },
 ];
 
-export function getCourseBySlug(slug: string): Course | undefined {
-  return courses.find((course) => course.slug === slug);
+export async function getAllCourses(): Promise<Course[]> {
+  try {
+    const rows = await prisma.course.findMany({ orderBy: { createdAt: "asc" } });
+    if (rows.length > 0) return rows.map((row) => row.data as unknown as Course);
+  } catch {
+    // Course table not migrated yet, or DB unreachable — serve the defaults below.
+  }
+  return seedCourses;
+}
+
+export async function getCourseBySlug(slug: string): Promise<Course | undefined> {
+  try {
+    const row = await prisma.course.findUnique({ where: { slug } });
+    if (row) return row.data as unknown as Course;
+  } catch {
+    // Course table not migrated yet, or DB unreachable — fall back below.
+  }
+  return seedCourses.find((course) => course.slug === slug);
 }

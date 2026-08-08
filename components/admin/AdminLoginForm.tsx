@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function AdminLoginForm() {
+export default function AdminLoginForm({ redirectTo }: { redirectTo?: string }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +26,7 @@ export default function AdminLoginForm() {
         setError(data.error || "Login failed");
         return;
       }
-      router.push("/admin/dashboard");
+      router.push(redirectTo || "/admin/dashboard");
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");

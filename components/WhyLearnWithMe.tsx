@@ -34,8 +34,15 @@ export default function WhyLearnWithMe() {
 
           {/* Right Column: Content */}
           <div className="flex-1 space-y-6 sm:space-y-8 text-left">
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-px w-6 bg-[#e8745b]" />
+              <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+                Meet Your Instructor
+              </span>
+            </div>
+
             {/* SEO Heading */}
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-semibold text-[#faf8f5] leading-tight">
+            <h2 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#faf8f5]">
               Why Learn Yoga Online with an Experienced Instructor?
             </h2>
 

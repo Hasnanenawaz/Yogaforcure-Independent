@@ -38,14 +38,20 @@ export default async function BlogPage() {
       <main className="min-h-screen bg-linear-to-b from-[#f5f1eb] to-[#ede8e0] pt-20 sm:pt-24 pb-16 sm:pb-20 overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
           <header className="text-center mb-10 sm:mb-12 lg:mb-16">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1a3a1a] mb-3 sm:mb-4 mt-3">
-              Blog
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <span className="inline-block h-px w-6 bg-[#e8745b]" />
+              <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+                Blog
+              </span>
+              <span className="inline-block h-px w-6 bg-[#e8745b]" />
+            </div>
+            <h1 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#1a3a1a] mb-3 sm:mb-4">
+              Notes on practice
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-[#2d2d2d] max-w-2xl mx-auto px-2">
+            <p className="text-base sm:text-lg text-[#2d2d2d] max-w-2xl mx-auto px-2">
               Yoga practice, wellness, and insights from your online Indian yoga
               teacher.
             </p>
-            <div className="w-20 sm:w-24 h-1 bg-linear-to-r from-[#9caf88] to-[#d4ddd4] mx-auto rounded-full mt-5 sm:mt-6" />
           </header>
 
           {blogs.length === 0 ? (
@@ -88,7 +94,7 @@ export default async function BlogPage() {
                           day: "numeric",
                         })}
                       </time>
-                      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#1a3a1a] mt-2 mb-2 sm:mb-3 group-hover:text-[#2d5a2d] transition-colors line-clamp-2">
+                      <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-[#1a3a1a] mt-2 mb-2 sm:mb-3 group-hover:text-[#2d5a2d] transition-colors line-clamp-2">
                         {blog.title}
                       </h2>
                       <p className="text-[#2d2d2d] text-sm sm:text-base leading-relaxed line-clamp-3 flex-1">

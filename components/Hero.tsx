@@ -59,15 +59,15 @@ export default function Hero({ onHeroReady }: HeroProps) {
           <div className="flex flex-col justify-center text-center lg:text-left lg:max-w-xl lg:mx-0 order-1 lg:h-full lg:py-4">
             <div className="mb-2 sm:mb-3 flex justify-center lg:justify-start">
               <span className="inline-flex items-center justify-center w-9 h-9 bg-[#e4eee7]/90 rounded-full">
-                <Leaf className="w-5 h-5 text-[#40916C]" />
+                <Leaf className="w-5 h-5 text-[#2d5a2d]" />
               </span>
             </div>
 
             <h2 className="text-[2rem] leading-[1.12] sm:text-4xl md:text-[2.65rem] lg:text-[2.5rem] xl:text-[2.85rem] 2xl:text-5xl font-bold text-white lg:text-gray-900 mb-3 sm:mb-4">
               Build{" "}
-              <span className="text-[#51e17a] lg:text-[#40916C]">strength</span>
+              <span className="text-[#9caf88] lg:text-[#2d5a2d]">strength</span>
               . Improve{" "}
-              <span className="text-[#51e17a] lg:text-[#40916C]">
+              <span className="text-[#9caf88] lg:text-[#2d5a2d]">
                 flexibility
               </span>
               .

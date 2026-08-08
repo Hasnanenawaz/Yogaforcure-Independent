@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
+import { getAllCourses } from "@/lib/courses";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yogaforcure.in";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Yoga by Neha — Online Indian Yoga Teacher | Strength & Flexibility",
@@ -71,7 +74,9 @@ const websiteSchema = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const courses = await getAllCourses();
+
   return (
     <>
       <script
@@ -86,7 +91,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
-      <HomeClient />
+      <HomeClient courses={courses} />
     </>
   );
 }

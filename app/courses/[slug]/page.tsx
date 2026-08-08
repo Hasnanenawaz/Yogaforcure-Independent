@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, Clock, BookOpen, Gauge, ShieldCheck, Star } from "lucide-react";
+import { Check, Clock, BookOpen, Gauge, ShieldCheck, Star, Pencil } from "lucide-react";
 import FloatingNavbar from "@/components/FloatingNavbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import CourseVideoPreview from "@/components/course/CourseVideoPreview";
-import { courses, getCourseBySlug, instructor } from "@/lib/courses";
+import { getCourseBySlug, instructor } from "@/lib/courses";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { getSession } from "@/lib/auth";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yogaforcure.in";
 
@@ -15,13 +16,11 @@ type Props = { params: Promise<{ slug: string }> };
 
 const heroMetaIcons = [Clock, BookOpen, Gauge, Check];
 
-export function generateStaticParams() {
-  return courses.map((course) => ({ slug: course.slug }));
-}
+export const revalidate = 300;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const course = getCourseBySlug(slug);
+  const course = await getCourseBySlug(slug);
   if (!course) return { title: "Not found" };
 
   return {
@@ -40,11 +39,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CoursePage({ params }: Props) {
   const { slug } = await params;
-  const course = getCourseBySlug(slug);
+  const [course, session] = await Promise.all([getCourseBySlug(slug), getSession()]);
 
   if (!course) notFound();
 
-  const enrollMessage = `Hi, I'd like to enroll in "${course.title}". Please share details.`;
+  const enrollMessage = `Hi Neha! I'd like to enroll in ${course.title} (${course.price}). Please share the UPI details.`;
   const enrollUrl = getWhatsAppUrl(enrollMessage);
 
   const courseSchema = {
@@ -575,7 +574,7 @@ export default async function CoursePage({ params }: Props) {
                     </Link>
                     <div className="flex items-center justify-center gap-1.5 text-[0.78rem] text-[#6b6b6b] mt-1.5">
                       <ShieldCheck className="w-[14px] h-[14px] text-[#2d5a2d]" />
-                      Secure checkout via WhatsApp, UPI and cards accepted
+                      Pay by UPI in WhatsApp, confirmation same day
                     </div>
                   </div>
                 </div>
@@ -584,6 +583,16 @@ export default async function CoursePage({ params }: Props) {
           </div>
         </div>
       </main>
+
+      {session && (
+        <Link
+          href={`/courses/${slug}/admin`}
+          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-[#1a3a1a] text-white text-sm font-semibold px-5 py-3 shadow-[0_12px_28px_rgba(27,67,50,0.35)] hover:bg-[#2d5a2d] transition-colors"
+        >
+          <Pencil className="w-4 h-4" />
+          Edit this course
+        </Link>
+      )}
 
       <Footer />
     </>

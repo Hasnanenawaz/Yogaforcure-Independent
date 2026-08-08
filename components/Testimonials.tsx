@@ -62,41 +62,41 @@ function TestimonialCard({
 }) {
   return (
     <motion.div
-      whileHover={{ backgroundColor: "rgba(39, 39, 39, 0.95)" }}
+      whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.09)" }}
       transition={{ type: "tween", duration: 0.2 }}
-      className="w-[320px] sm:w-[380px] shrink-0 rounded-xl bg-[#272727] px-4 py-3 sm:px-5 sm:py-4"
+      className="w-[320px] sm:w-[380px] shrink-0 rounded-xl bg-white/[0.06] border border-white/10 px-4 py-3 sm:px-5 sm:py-4"
     >
       <div className="flex gap-3 sm:gap-4">
-        {/* Avatar — YouTube style */}
+        {/* Avatar */}
         <div
-          className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 rounded-full bg-[#3f3f3f] flex items-center justify-center text-[#e0e0e0] text-xs sm:text-sm font-medium"
+          className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 rounded-full bg-white/10 flex items-center justify-center text-[#e4eee7] text-xs sm:text-sm font-medium"
           aria-hidden
         >
           {t.avatar}
         </div>
         <div className="min-w-0 flex-1">
-          {/* Header: name + time ago (exactly like YouTube) */}
+          {/* Header: name + time ago */}
           <div className="flex flex-wrap items-baseline gap-x-1.5">
             <span className="text-[13px] sm:text-sm font-medium text-white">
               {t.name}
             </span>
-            <span className="text-[12px] sm:text-xs text-[#909090]">
+            <span className="text-[12px] sm:text-xs text-[#9caf88]/70">
               {t.timeAgo}
             </span>
           </div>
           {/* Comment body */}
-          <p className="mt-1 text-[13px] sm:text-sm leading-[1.5] text-[#aaaaaa]">
+          <p className="mt-1 text-[13px] sm:text-sm leading-[1.5] text-[#f5f1eb]/75">
             {t.text}
           </p>
-          {/* Action row: like (red heart) + reply — YouTube style */}
+          {/* Action row: like + reply */}
           <div className="mt-2 flex items-center gap-4">
             <button
               type="button"
-              className="flex items-center gap-1.5 text-[#909090] hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3ea6ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f0f0f] rounded"
+              className="flex items-center gap-1.5 text-[#e8745b] hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e8745b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a3a1a] rounded"
               aria-label={`${t.likes} likes`}
             >
               <Heart
-                className="h-4 w-4 sm:h-[18px] sm:w-[18px] fill-[#ff0000] text-[#ff0000]"
+                className="h-4 w-4 sm:h-[18px] sm:w-[18px] fill-[#e8745b] text-[#e8745b]"
                 strokeWidth={2}
                 aria-hidden
               />
@@ -106,7 +106,7 @@ function TestimonialCard({
             </button>
             <button
               type="button"
-              className="text-[12px] sm:text-xs font-medium text-[#909090] hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3ea6ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f0f0f] rounded"
+              className="text-[12px] sm:text-xs font-medium text-[#9caf88] hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e8745b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a3a1a] rounded"
               aria-label="Reply"
             >
               Reply
@@ -123,7 +123,7 @@ export default function Testimonials() {
   const track = [...testimonials, ...testimonials];
 
   return (
-    <section className="relative py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f] overflow-hidden">
+    <section className="relative py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#1a3a1a] overflow-hidden">
       <div className="relative max-w-7xl mx-auto">
         {/* Section header — dark theme */}
         <motion.div
@@ -133,13 +133,17 @@ export default function Testimonials() {
           transition={{ duration: 0.7 }}
           className="text-center mb-12 lg:mb-16"
         >
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#e8745b]">
-            Testimonials
-          </p>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+            <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+              Testimonials
+            </span>
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+          </div>
+          <h2 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-white">
             What our community says
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#aaaaaa] max-w-2xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg text-[#f5f1eb]/70 max-w-2xl mx-auto">
             Real experiences from people who found their practice here.
           </p>
         </motion.div>

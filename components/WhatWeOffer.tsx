@@ -75,22 +75,29 @@ export default function WhatWeOffer() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20">
         <header className="text-center mb-12 sm:mb-16 md:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-[#1a3a1a] mb-4">
-            Our Yoga Programs
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+            <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+              Our Programs
+            </span>
+            <span className="inline-block h-px w-6 bg-[#e8745b]" />
+          </div>
+          <h2 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#1a3a1a] mb-4">
+            Choose how you want to practice
           </h2>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#2d2d2d] max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-[#2d2d2d] max-w-3xl mx-auto">
             Choose from live group classes, personalized one-on-one sessions, or
             self-paced online yoga programs — all taught in clear English.{" "}
             <Link
               href="/#pricing"
-              className="text-[#e8745b] hover:text-[#f0906f] font-medium no-underline"
+              className="text-[#e8745b] hover:text-[var(--coral-light)] font-medium no-underline"
             >
               View pricing
             </Link>
             {" · "}
             <Link
               href="/#weekly-live-sessions"
-              className="text-[#e8745b] hover:text-[#f0906f] font-medium no-underline"
+              className="text-[#e8745b] hover:text-[var(--coral-light)] font-medium no-underline"
             >
               View schedule
             </Link>

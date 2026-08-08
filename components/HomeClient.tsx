@@ -18,8 +18,9 @@ import ClosingCTA from "@/components/ClosingCTA";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import type { Course } from "@/lib/courses";
 
-export default function HomeClient() {
+export default function HomeClient({ courses }: { courses: Course[] }) {
   const [heroReady, setHeroReady] = useState(false);
   const [contentInteractive, setContentInteractive] = useState(false);
 
@@ -43,7 +44,7 @@ export default function HomeClient() {
             flexibility.
           </h1>
           <Hero onHeroReady={onHeroReady} />
-          <ProgramsAndCourses />
+          <ProgramsAndCourses courses={courses} />
           <WhatWeOffer />
           <WhyLearnWithMe />
           <WhatYoullGain />
@@ -56,6 +57,18 @@ export default function HomeClient() {
             className="relative min-h-screen bg-gradient-to-b from-[#f5f1eb] to-[#ede8e0] pt-16 pb-20 lg:pt-24 lg:pb-32 scroll-mt-24"
           >
             <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+              <div className="text-center mb-10 lg:mb-14">
+                <div className="flex items-center justify-center gap-2 mb-3">
+                  <span className="inline-block h-px w-6 bg-[#e8745b]" />
+                  <span className="text-[0.78rem] font-bold uppercase tracking-widest text-[#e8745b]">
+                    Gallery
+                  </span>
+                  <span className="inline-block h-px w-6 bg-[#e8745b]" />
+                </div>
+                <h2 className="font-extrabold text-[1.9rem] sm:text-3xl md:text-4xl lg:text-[2.4rem] leading-[1.15] text-[#1a3a1a]">
+                  Moments from the mat
+                </h2>
+              </div>
               <GallerySlideshow />
               <div className="mt-12 lg:mt-16 flex justify-center">
                 <Link

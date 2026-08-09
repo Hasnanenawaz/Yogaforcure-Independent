@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
 import { getAllCourses } from "@/lib/courses";
+import { homeFaq } from "@/lib/homeFaq";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yogaforcure.in";
 
@@ -74,6 +75,16 @@ const websiteSchema = {
   },
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homeFaq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
 export default async function Home() {
   const courses = await getAllCourses();
 
@@ -90,6 +101,10 @@ export default async function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <HomeClient courses={courses} />
     </>

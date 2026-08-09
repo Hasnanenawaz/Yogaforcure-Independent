@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
+import { getAllCourses } from "@/lib/courses";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yogaforcure.in";
 
@@ -28,10 +29,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const blogs = await prisma.blog.findMany({
-    where: { published: true },
-    select: { slug: true, updatedAt: true },
-  });
+  const [blogs, courses] = await Promise.all([
+    prisma.blog.findMany({
+      where: { published: true },
+      select: { slug: true, updatedAt: true },
+    }),
+    getAllCourses(),
+  ]);
 
   const blogPages: MetadataRoute.Sitemap = blogs.map((blog) => ({
     url: `${baseUrl}/blog/${blog.slug}`,
@@ -40,5 +44,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...blogPages];
+  const coursePages: MetadataRoute.Sitemap = courses.map((course) => ({
+    url: `${baseUrl}/courses/${course.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
+  return [...staticPages, ...coursePages, ...blogPages];
 }

@@ -28,6 +28,7 @@ const navLinks = [
   { href: "#schedule", label: "Schedule" },
   { href: "#pricing", label: "Pricing" },
   { href: "#gallery", label: "Gallery" },
+  { href: "#faq", label: "FAQ" },
   { href: "/blog", label: "Blog" },
 ];
 

@@ -77,6 +77,16 @@ export default async function BlogPostPage({ params }: Props) {
     ...(blog.images[0] && { image: blog.images.map((img) => img.url) }),
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: baseUrl },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${baseUrl}/blog` },
+      { "@type": "ListItem", position: 3, name: blog.title, item: `${baseUrl}/blog/${slug}` },
+    ],
+  };
+
   const formattedDate = blog.updatedAt.toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
@@ -88,6 +98,10 @@ export default async function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <FloatingNavbar />
 

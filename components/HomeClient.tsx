@@ -7,6 +7,7 @@ import FloatingNavbar from "@/components/FloatingNavbar";
 import HashScrollHandler from "@/components/HashScrollHandler";
 import SplashScreen from "@/components/SplashScreen";
 import ProgramsAndCourses from "@/components/sections/ProgramsAndCourses";
+import FAQSection from "@/components/sections/FAQSection";
 import WhatWeOffer from "@/components/WhatWeOffer";
 import WhyLearnWithMe from "@/components/WhyLearnWithMe";
 import WhatYoullGain from "@/components/WhatYoullGain";
@@ -82,6 +83,7 @@ export default function HomeClient({ courses }: { courses: Course[] }) {
           </section>
           <ClientReviewReels />
           <Testimonials />
+          <FAQSection />
           <ClosingCTA />
 
           {/* Other sections temporarily hidden for video hero evaluation */}

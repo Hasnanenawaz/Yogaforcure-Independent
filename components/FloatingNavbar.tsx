@@ -152,7 +152,7 @@ export default function FloatingNavbar() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-          className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-7xl px-4 sm:px-6"
+          className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[1400px] px-4 sm:px-6"
         >
         <div className="rounded-full bg-[#faf8f5]/80 backdrop-blur-md border border-[#9caf88]/30 shadow-lg px-4 sm:px-6 py-3 mx-auto">
           <div className="flex items-center justify-between w-full gap-2">
@@ -186,7 +186,7 @@ export default function FloatingNavbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-0.5 flex-1 justify-center min-w-0">
+            <div className="hidden xl:flex items-center space-x-0.5 flex-1 justify-center min-w-0">
               {navLinks.map((link) => (
                 <div key={link.href} className="relative">
                   {link.dropdown ? (
@@ -198,7 +198,7 @@ export default function FloatingNavbar() {
                       <button
                         type="button"
                         onClick={() => handleDropdownToggle(link.label)}
-                        className="flex items-center gap-1 px-3 py-2 text-[#1a3a1a] font-medium hover:text-[#2d5a2d] transition-colors rounded-full group whitespace-nowrap"
+                        className="flex items-center gap-1 px-2.5 py-2 text-[#1a3a1a] font-medium hover:text-[#2d5a2d] transition-colors rounded-full group whitespace-nowrap"
                       >
                         {link.label}
                         <ChevronDown
@@ -248,7 +248,7 @@ export default function FloatingNavbar() {
                         }
                         // For /pricing and other links, let them navigate normally
                       }}
-                      className="relative px-3 py-2 text-[#1a3a1a] font-medium hover:text-[#2d5a2d] transition-colors rounded-full group whitespace-nowrap"
+                      className="relative px-2.5 py-2 text-[#1a3a1a] font-medium hover:text-[#2d5a2d] transition-colors rounded-full group whitespace-nowrap"
                     >
                       {link.label}
                       <span className="absolute bottom-1 left-3 right-3 h-0.5 bg-[#e8745b] rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
@@ -259,12 +259,12 @@ export default function FloatingNavbar() {
             </div>
 
             {/* Desktop CTA Buttons */}
-            <motion.div className="hidden lg:flex items-center gap-2 shrink-0">
+            <motion.div className="hidden xl:flex items-center gap-1.5 shrink-0">
               {student ? (
                 <>
                   <Link
                     href="/learn"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 border border-[#2d5a2d] text-[#2d5a2d] font-medium rounded-full hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-colors duration-300 whitespace-nowrap text-sm"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#2d5a2d] text-[#2d5a2d] font-medium rounded-full hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-colors duration-300 whitespace-nowrap text-sm"
                   >
                     <User className="w-4 h-4" />
                     {student.name.split(" ")[0]}
@@ -281,7 +281,7 @@ export default function FloatingNavbar() {
               ) : (
                 <Link
                   href="/login"
-                  className="inline-flex items-center px-4 py-2 border border-[#2d5a2d] text-[#2d5a2d] font-medium rounded-full hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-colors duration-300 whitespace-nowrap text-sm"
+                  className="inline-flex items-center px-3.5 py-2 border border-[#2d5a2d] text-[#2d5a2d] font-medium rounded-full hover:bg-[#2d5a2d] hover:text-[#faf8f5] transition-colors duration-300 whitespace-nowrap text-sm"
                 >
                   Log in
                 </Link>
@@ -294,7 +294,7 @@ export default function FloatingNavbar() {
                     setIsCallModalOpen(true);
                   }
                 }}
-                className="inline-flex items-center px-4 py-2 bg-[#2d5a2d] text-[#faf8f5] font-semibold rounded-full shadow-md hover:shadow-lg hover:bg-[#1a3a1a] transition-all duration-300 whitespace-nowrap text-sm cursor-pointer"
+                className="inline-flex items-center px-3.5 py-2 bg-[#2d5a2d] text-[#faf8f5] font-semibold rounded-full shadow-md hover:shadow-lg hover:bg-[#1a3a1a] transition-all duration-300 whitespace-nowrap text-sm cursor-pointer"
               >
                 <Phone className="w-4 h-4 mr-1.5" />
                 Call Now
@@ -307,7 +307,7 @@ export default function FloatingNavbar() {
                   // Ensure WhatsApp link opens properly
                   e.stopPropagation();
                 }}
-                className="inline-flex items-center px-4 py-2 bg-[#2d5a2d] text-[#faf8f5] font-semibold rounded-full shadow-md hover:shadow-lg hover:bg-[#1a3a1a] transition-all duration-300 whitespace-nowrap text-sm"
+                className="inline-flex items-center px-3.5 py-2 bg-[#2d5a2d] text-[#faf8f5] font-semibold rounded-full shadow-md hover:shadow-lg hover:bg-[#1a3a1a] transition-all duration-300 whitespace-nowrap text-sm"
               >
                 Book Consultation
               </Link>
@@ -317,7 +317,7 @@ export default function FloatingNavbar() {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-[#1a3a1a] rounded-full hover:bg-[#e8ede8]/40 transition-colors"
+              className="xl:hidden p-2 text-[#1a3a1a] rounded-full hover:bg-[#e8ede8]/40 transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -340,7 +340,7 @@ export default function FloatingNavbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 xl:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
@@ -348,7 +348,7 @@ export default function FloatingNavbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed top-24 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4 sm:px-6 lg:hidden"
+              className="fixed top-24 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4 sm:px-6 xl:hidden"
             >
               <div className="rounded-3xl bg-[#faf8f5]/95 backdrop-blur-md shadow-xl border border-[#9caf88]/30 overflow-hidden">
                 <nav className="px-6 py-6 space-y-2">

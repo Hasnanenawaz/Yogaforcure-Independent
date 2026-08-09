@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LogOut, Plus, LayoutDashboard, Users, BookOpen, Newspaper } from "lucide-react";
+import { LogOut, Plus, LayoutDashboard, Users, BookOpen, Newspaper, MessageCircle } from "lucide-react";
 
 export default function AdminDashboardShell({
   email,
@@ -51,6 +51,13 @@ export default function AdminDashboardShell({
             >
               <Users className="w-4 h-4" />
               Enrollments
+            </Link>
+            <Link
+              href="/admin/dashboard/comments"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-lg border border-[#9caf88]/40 text-sm hover:bg-[#2d5a2d] transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Comments
             </Link>
             <Link
               href="/admin/dashboard/blogs"

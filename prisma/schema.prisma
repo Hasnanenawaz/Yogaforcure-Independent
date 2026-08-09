@@ -35,13 +35,13 @@ model Blog {
 }
 
 model BlogImage {
-  id        String @id @default(cuid())
-  url       String
-  publicId  String
-  alt       String @default("")
-  order     Int    @default(0)
-  blogId    String
-  blog      Blog   @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  id       String @id @default(cuid())
+  url      String
+  publicId String
+  alt      String @default("")
+  order    Int    @default(0)
+  blogId   String
+  blog     Blog   @relation(fields: [blogId], references: [id], onDelete: Cascade)
 }
 
 model Course {
@@ -127,8 +127,8 @@ model LessonProgress {
 }
 
 model Comment {
-  id        String   @id @default(cuid())
-  text      String   @db.Text
+  id        String    @id @default(cuid())
+  text      String    @db.Text
   // Either studentId or adminId is set, never both — isAdmin mirrors which.
   // (The spec's Comment model required studentId even for admin replies, which
   // doesn't work since the admin isn't a Student — made both nullable instead.)
@@ -136,11 +136,13 @@ model Comment {
   adminId   String?
   lessonId  String
   parentId  String?
-  isAdmin   Boolean  @default(false)
-  student   Student? @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  admin     Admin?   @relation(fields: [adminId], references: [id], onDelete: Cascade)
-  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
+  isAdmin   Boolean   @default(false)
+  student   Student?  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  admin     Admin?    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  lesson    Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("CommentReplies")
+  createdAt DateTime  @default(now())
 
   @@index([lessonId])
 }

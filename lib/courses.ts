@@ -388,6 +388,12 @@ export function courseDisplayTitle(course: { title: string | null; data: unknown
   return course.title || (course.data as { title?: string } | null)?.title || course.slug;
 }
 
+export function parseDurationMinutes(duration: string | null | undefined): number {
+  if (!duration) return 0;
+  const match = duration.match(/\d+/);
+  return match ? parseInt(match[0], 10) : 0;
+}
+
 export function emptyCourseData(slug: string, title: string): Course {
   return {
     slug,

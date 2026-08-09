@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { CircleDot, CheckCircle2, Clock } from "lucide-react";
 import { getStudentSession } from "@/lib/studentAuth";
 import { prisma } from "@/lib/prisma";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
-import { courseDisplayTitle } from "@/lib/courses";
+import { courseDisplayTitle, parseDurationMinutes, instructor } from "@/lib/courses";
 
 export default async function LearnDashboardPage() {
   const session = await getStudentSession();
@@ -20,12 +21,49 @@ export default async function LearnDashboardPage() {
   });
   const completedLessonIds = new Set(completedProgress.map((p) => p.lessonId));
 
+  const allLessons = enrollments.flatMap((e) => e.course.lessons);
+  const totalMinutes = allLessons
+    .filter((l) => completedLessonIds.has(l.id))
+    .reduce((sum, l) => sum + parseDurationMinutes(l.duration), 0);
+
   return (
     <div>
       <h1 className="text-2xl sm:text-3xl font-semibold text-[#1a3a1a] mb-2">
         Welcome, {session.name.split(" ")[0]}
       </h1>
       <p className="text-[#6b6b6b] mb-8">Pick up where you left off.</p>
+
+      <div className="grid sm:grid-cols-3 gap-4 mb-10">
+        <div className="bg-white rounded-2xl border border-[#ede8e0] p-5 flex items-center gap-4">
+          <div className="w-11 h-11 rounded-xl bg-[#e8ede8] flex items-center justify-center shrink-0">
+            <CircleDot className="w-5 h-5 text-[#2d5a2d]" />
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#1a3a1a]">{enrollments.length}</p>
+            <p className="text-xs text-[#6b6b6b]">
+              Course{enrollments.length === 1 ? "" : "s"} enrolled
+            </p>
+          </div>
+        </div>
+        <div className="bg-white rounded-2xl border border-[#ede8e0] p-5 flex items-center gap-4">
+          <div className="w-11 h-11 rounded-xl bg-[#fbe3dc] flex items-center justify-center shrink-0">
+            <CheckCircle2 className="w-5 h-5 text-[#e8745b]" />
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#1a3a1a]">{completedLessonIds.size}</p>
+            <p className="text-xs text-[#6b6b6b]">Lessons complete</p>
+          </div>
+        </div>
+        <div className="bg-white rounded-2xl border border-[#ede8e0] p-5 flex items-center gap-4">
+          <div className="w-11 h-11 rounded-xl bg-[#f6edcf] flex items-center justify-center shrink-0">
+            <Clock className="w-5 h-5 text-[#c9a227]" />
+          </div>
+          <div>
+            <p className="text-xl font-semibold text-[#1a3a1a]">{totalMinutes} min</p>
+            <p className="text-xs text-[#6b6b6b]">Total practice time</p>
+          </div>
+        </div>
+      </div>
 
       {enrollments.length === 0 ? (
         <div className="text-center py-14 sm:py-20 bg-[#faf8f5] rounded-2xl border border-[#ede8e0] px-4">
@@ -103,6 +141,19 @@ export default async function LearnDashboardPage() {
           })}
         </div>
       )}
+
+      <div className="mt-12 bg-gradient-to-br from-[#1a3a1a] via-[#2d5a2d] to-[#40916c] rounded-3xl p-7 sm:p-10 grid sm:grid-cols-[auto_1fr] gap-6 sm:gap-9 items-center">
+        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#9caf88] to-[#f6edcf] border-2 border-white/25 flex items-center justify-center text-3xl font-bold text-[#1a3a1a] shrink-0 mx-auto sm:mx-0">
+          {instructor.initial}
+        </div>
+        <div>
+          <span className="inline-block bg-white/15 text-[#c9e4d4] text-xs font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full mb-3">
+            Lead instructor
+          </span>
+          <h2 className="text-xl sm:text-2xl font-semibold text-white mb-2">{instructor.name}</h2>
+          <p className="text-white/80 text-sm leading-relaxed">{instructor.bio}</p>
+        </div>
+      </div>
     </div>
   );
 }

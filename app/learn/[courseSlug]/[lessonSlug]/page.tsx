@@ -31,24 +31,18 @@ export default async function LessonPlayerPage({ params }: Props) {
   const prevLesson = lessonIndex > 0 ? course.lessons[lessonIndex - 1] : null;
   const nextLesson = lessonIndex < course.lessons.length - 1 ? course.lessons[lessonIndex + 1] : null;
 
-  const enrollment = await prisma.enrollment.findUnique({
-    where: { studentId_courseId: { studentId: session.studentId, courseId: course.id } },
-  });
-  const isEnrolled = Boolean(enrollment);
-
-  const progress = await prisma.lessonProgress.findMany({
-    where: {
-      studentId: session.studentId,
-      lessonId: { in: course.lessons.map((l) => l.id) },
-      isCompleted: true,
-    },
-    select: { lessonId: true },
-  });
-  const completedIds = new Set(progress.map((p) => p.lessonId));
-
-  const hasAccess = isEnrolled || lesson.isFreePreview;
-
-  const [reviews, comments, courseStatic] = await Promise.all([
+  const [enrollment, progress, reviews, comments, courseStatic] = await Promise.all([
+    prisma.enrollment.findUnique({
+      where: { studentId_courseId: { studentId: session.studentId, courseId: course.id } },
+    }),
+    prisma.lessonProgress.findMany({
+      where: {
+        studentId: session.studentId,
+        lessonId: { in: course.lessons.map((l) => l.id) },
+        isCompleted: true,
+      },
+      select: { lessonId: true },
+    }),
     prisma.review.findMany({
       where: { courseId: course.id },
       include: { student: { select: { name: true } } },
@@ -64,6 +58,9 @@ export default async function LessonPlayerPage({ params }: Props) {
     }),
     getCourseBySlug(courseSlug),
   ]);
+  const isEnrolled = Boolean(enrollment);
+  const completedIds = new Set(progress.map((p) => p.lessonId));
+  const hasAccess = isEnrolled || lesson.isFreePreview;
 
   const reviewItems: ReviewItem[] = reviews.map((r) => ({
     id: r.id,

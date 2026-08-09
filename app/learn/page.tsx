@@ -9,16 +9,17 @@ export default async function LearnDashboardPage() {
   const session = await getStudentSession();
   if (!session) return null;
 
-  const enrollments = await prisma.enrollment.findMany({
-    where: { studentId: session.studentId },
-    orderBy: { createdAt: "desc" },
-    include: { course: { include: { lessons: { orderBy: { orderNumber: "asc" } } } } },
-  });
-
-  const completedProgress = await prisma.lessonProgress.findMany({
-    where: { studentId: session.studentId, isCompleted: true },
-    select: { lessonId: true },
-  });
+  const [enrollments, completedProgress] = await Promise.all([
+    prisma.enrollment.findMany({
+      where: { studentId: session.studentId },
+      orderBy: { createdAt: "desc" },
+      include: { course: { include: { lessons: { orderBy: { orderNumber: "asc" } } } } },
+    }),
+    prisma.lessonProgress.findMany({
+      where: { studentId: session.studentId, isCompleted: true },
+      select: { lessonId: true },
+    }),
+  ]);
   const completedLessonIds = new Set(completedProgress.map((p) => p.lessonId));
 
   const allLessons = enrollments.flatMap((e) => e.course.lessons);

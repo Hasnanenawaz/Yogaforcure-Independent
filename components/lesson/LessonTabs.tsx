@@ -44,7 +44,7 @@ export default function LessonTabs({
   ];
 
   return (
-    <div className="bg-white rounded-2xl border border-[#ede8e0] overflow-hidden">
+    <div className="bg-white rounded-3xl border border-[#ede8e0] overflow-hidden">
       <div className="flex gap-1 border-b border-[#ede8e0] px-2 sm:px-4 overflow-x-auto">
         {tabs.map((t) => (
           <button
@@ -70,7 +70,7 @@ export default function LessonTabs({
               <p className="text-[#6b6b6b] leading-relaxed mb-5">{lessonDescription}</p>
             )}
             {courseHighlights.length > 0 && (
-              <div className="bg-[#f5f1eb] rounded-2xl p-6">
+              <div className="bg-[#f5f1eb] rounded-3xl p-6">
                 <h3 className="text-sm font-semibold text-[#1a3a1a] mb-4">
                   What you&apos;ll gain from this course
                 </h3>

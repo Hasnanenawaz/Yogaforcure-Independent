@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CheckCircle2, Lock, PlayCircle } from "lucide-react";
+import { CheckCircle2, ListChecks, Lock, PlayCircle } from "lucide-react";
 
 type SidebarLesson = {
   slug: string;
@@ -25,9 +25,14 @@ export default function LessonSidebar({
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <aside className="bg-[#faf8f5] rounded-2xl border border-[#ede8e0]/80 h-fit overflow-hidden">
-      <div className="p-4 border-b border-[#ede8e0]">
-        <h2 className="text-sm font-semibold text-[#1a3a1a] mb-3">Course content</h2>
+    <aside className="bg-[#faf8f5] rounded-3xl border border-[#ede8e0]/80 h-fit overflow-hidden">
+      <div className="p-4 sm:p-5 border-b border-[#ede8e0]">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-7 h-7 rounded-full bg-[#e8ede8] flex items-center justify-center shrink-0">
+            <ListChecks className="w-3.5 h-3.5 text-[#2d5a2d]" />
+          </div>
+          <h2 className="text-sm font-semibold text-[#1a3a1a]">Course content</h2>
+        </div>
         <div className="flex items-center gap-2.5">
           <div className="flex-1 h-1.5 rounded-full bg-[#ede8e0] overflow-hidden">
             <div
@@ -51,7 +56,7 @@ export default function LessonSidebar({
             return (
               <div
                 key={lesson.slug}
-                className="flex items-center gap-2.5 px-2 py-2.5 rounded-lg text-[#9a9a9a]"
+                className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-xl text-[#9a9a9a]"
               >
                 <Lock className="w-4 h-4 shrink-0" />
                 <div className="min-w-0">
@@ -66,9 +71,9 @@ export default function LessonSidebar({
             <Link
               key={lesson.slug}
               href={`/learn/${courseSlug}/${lesson.slug}`}
-              className={`flex items-center gap-2.5 px-2 py-2.5 rounded-lg text-sm transition-colors ${
+              className={`flex items-center gap-2.5 px-2.5 py-2.5 rounded-xl text-sm transition-colors ${
                 isCurrent
-                  ? "bg-[#2d5a2d] text-white"
+                  ? "bg-[#2d5a2d] text-white shadow-sm"
                   : "text-[#2d2d2d] hover:bg-[#e8ede8]/60"
               }`}
             >

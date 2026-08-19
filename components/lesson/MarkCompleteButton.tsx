@@ -40,7 +40,7 @@ export default function MarkCompleteButton({
       disabled={busy}
       className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium border transition-colors disabled:opacity-60 ${
         completed
-          ? "bg-[#e8ede8] border-[#2d5a2d]/40 text-[#2d5a2d]"
+          ? "bg-[#2d5a2d] border-[#2d5a2d] text-white"
           : "border-[#ede8e0] text-[#6b6b6b] hover:border-[#2d5a2d] hover:text-[#2d5a2d]"
       }`}
     >

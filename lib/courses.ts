@@ -394,6 +394,19 @@ export function parseDurationMinutes(duration: string | null | undefined): numbe
   return match ? parseInt(match[0], 10) : 0;
 }
 
+const COVER_GRADIENTS = [
+  "linear-gradient(135deg,#1B4332,#40916C)",
+  "linear-gradient(135deg,#2D6A4F,#95B8A6)",
+  "linear-gradient(135deg,#6B4A2D,#C9A227)",
+  "linear-gradient(135deg,#7A4A3A,#E8745B)",
+];
+
+export function courseCoverGradient(slug: string): string {
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) hash = (hash * 31 + slug.charCodeAt(i)) >>> 0;
+  return COVER_GRADIENTS[hash % COVER_GRADIENTS.length];
+}
+
 export function emptyCourseData(slug: string, title: string): Course {
   return {
     slug,

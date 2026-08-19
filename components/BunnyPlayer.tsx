@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Script from "next/script";
 
 type PlayerJsInstance = {
@@ -29,7 +29,7 @@ export default function BunnyPlayer({
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const hasMarkedComplete = useRef(alreadyCompleted);
 
-  function handleScriptLoad() {
+  function attachPlayer() {
     if (!iframeRef.current || !window.playerjs) return;
     const player = new window.playerjs.Player(iframeRef.current);
     player.on("ended", () => {
@@ -41,12 +41,21 @@ export default function BunnyPlayer({
     });
   }
 
+  // next/script's onLoad only fires the first time this script src loads on the
+  // page — client-side navigation to a new lesson remounts this component with a
+  // fresh iframe, but the shared playerjs script won't re-fire onLoad, so we also
+  // attach directly whenever the script is already present.
+  useEffect(() => {
+    if (window.playerjs) attachPlayer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <Script
         src="https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js"
         strategy="afterInteractive"
-        onLoad={handleScriptLoad}
+        onLoad={attachPlayer}
       />
       <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black">
         <iframe

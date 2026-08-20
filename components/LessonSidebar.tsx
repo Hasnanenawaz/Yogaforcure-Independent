@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CheckCircle2, ListChecks, Lock, PlayCircle } from "lucide-react";
+import { CheckCircle2, Clock, ListChecks, Lock, PlayCircle, Trophy } from "lucide-react";
+import { parseDurationMinutes } from "@/lib/courses";
 
 type SidebarLesson = {
   slug: string;
@@ -23,6 +24,10 @@ export default function LessonSidebar({
   const total = lessons.length;
   const completed = lessons.filter((l) => l.isCompleted).length;
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+  const isComplete = total > 0 && completed === total;
+  const remainingMinutes = lessons
+    .filter((l) => !l.isCompleted)
+    .reduce((sum, l) => sum + parseDurationMinutes(l.duration), 0);
 
   return (
     <aside className="bg-[#faf8f5] rounded-3xl border border-[#ede8e0]/80 h-fit overflow-hidden">
@@ -33,7 +38,7 @@ export default function LessonSidebar({
           </div>
           <h2 className="text-sm font-semibold text-[#1a3a1a]">Course content</h2>
         </div>
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 mb-3">
           <div className="flex-1 h-1.5 rounded-full bg-[#ede8e0] overflow-hidden">
             <div
               className="h-full bg-[#2d5a2d] rounded-full transition-all"
@@ -43,6 +48,19 @@ export default function LessonSidebar({
           <span className="text-xs font-semibold text-[#2d5a2d] shrink-0">
             {completed}/{total} done
           </span>
+        </div>
+        <div className="flex items-center gap-1.5 text-xs text-[#6b6b6b]">
+          {isComplete ? (
+            <>
+              <Trophy className="w-3.5 h-3.5 text-[#c9a227]" />
+              <span className="font-medium text-[#1a3a1a]">Course complete</span>
+            </>
+          ) : (
+            <>
+              <Clock className="w-3.5 h-3.5" />
+              <span>{remainingMinutes} min remaining</span>
+            </>
+          )}
         </div>
       </div>
 

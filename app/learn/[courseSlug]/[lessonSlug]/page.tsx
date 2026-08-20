@@ -108,9 +108,21 @@ export default async function LessonPlayerPage({ params }: Props) {
 
       <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
         <div>
-          <span className="inline-block bg-[#fbe3dc] text-[#e8745b] text-[11px] font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full mb-3">
-            Lesson {lessonIndex + 1} of {course.lessons.length}
-          </span>
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <span className="inline-block bg-[#fbe3dc] text-[#e8745b] text-[11px] font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full">
+              Lesson {lessonIndex + 1} of {course.lessons.length}
+            </span>
+            {course.difficulty && (
+              <span className="inline-block bg-[#e8ede8] text-[#2d5a2d] text-[11px] font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full">
+                {course.difficulty}
+              </span>
+            )}
+            {lesson.duration && (
+              <span className="inline-flex items-center gap-1 bg-[#faf8f5] border border-[#ede8e0] text-[#6b6b6b] text-[11px] font-medium px-3 py-1 rounded-full">
+                {lesson.duration}
+              </span>
+            )}
+          </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-[#1a3a1a]">{lesson.title}</h1>
         </div>
         <div className="flex items-center gap-2">
